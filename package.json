@@ -1,0 +1,34 @@
+{
+  "name": "frono-roma",
+  "version": "1.0.0",
+  "description": "This is online pizzeria",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "install": "npm --prefix backend install backend",
+    "dev:backend": "npm install --prefix backend start",
+    "sequelize": "npm run --prefix backend sequelize",
+    "sequelize-cli": "npm run --prefix backend sequelize-cli",
+    "start": "npm start --prefix backend",
+    "build": "npm run --prefix backend build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IhorLazarkov/FronoPizza.git"
+  },
+  "keywords": [
+    "pizzeria online",
+    "web app",
+    "online shop",
+    "order pizza online",
+    "profile project"
+  ],
+  "author": "ilazarkov@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IhorLazarkov/FronoPizza/issues"
+  },
+  "homepage": "https://github.com/IhorLazarkov/FronoPizza#readme"
+}
