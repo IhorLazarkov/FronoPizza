@@ -47,6 +47,68 @@ Author: [Ihor Lazarkov](https://ihorlazarkov.github.io/IhorLazarkov/)
 
 ## API specifications
 
+
+<details>
+    <summary>Get all orders</summary>
+
+__Headers__
+
+    URI: /api/orders
+    Method: GET
+    
+
+__Response__
+
+    - status: 201
+
+    response: 
+        [
+            "order_id": Number: {
+                "created_at": String,
+                "total": Number,
+                "pizzas": [
+                    {
+                        "name": String,
+                        "quantity" : Number,
+                        "price": Number,
+                    },
+                    {
+                        "name": String,
+                        "quantity" : Number,
+                        "price": Number,
+                    },
+                ]
+            }
+        ]
+
+    - status 401 Unauthorized when use is not logged in
+    
+</details>
+
+<details>
+    <summary>Create order</summary>
+
+__Headers__
+
+    URI: /api/orders
+    Method: POST
+    Body: {
+        "user_id": Number,
+        "pizzas":[
+            "pizza_id": Number,
+        ],
+        "total":Number
+    }
+
+__Response__
+
+    - status: 201
+
+    response: 
+        {"message":"success"}
+
+</details>
+
 <details>
     <summary>Add a review</summary>
 
@@ -63,10 +125,101 @@ __Headers__
 
 __Response__
 
-    status: 201
+    - status: 201
 
     response: 
         {"message":"success"}
+
+    - status 401 Unauthorized when use is not logged in
+
+</details>
+
+<details>
+    <summary>Edit a review</summary>
+
+__Headers__
+
+    URI: /api/review/:id
+    Method: PUT
+    Body: {
+        "user_id": Number,
+        "pizza_id: Number,
+        "rating": Number,
+        "review": String
+    }
+
+__Response__
+
+    - status: 200
+
+    response: 
+        {"message":"success"}
+
+    - status 401 Unauthorized when use is not logged in
+    - status 403 Forbiden when use is not owner of the review
+
+</details>
+
+<details>
+    <summary>Delete review</summary>
+
+__Headers__
+
+    URI: /api/review/:id
+    Method: DELETE
+
+__Response__
+
+    - status: 200
+
+    response: 
+        {"message":"success"}
+
+    - status 401 Unauthorized when use is not logged in
+    - status 403 Forbiden when use is not owner of the review
+
+</details>
+
+<details>
+    <summary>Add a favorite</summary>
+
+__Headers__
+
+    URI: /api/faivorite
+    Method: POST
+    Body: {
+        "user_id": Number,
+        "pizza_id: Number,
+    }
+
+__Response__
+
+    - status: 201
+
+    response: 
+        {"message":"success"}
+
+    - status 401 Unauthorized when user is not logged in
+
+</details>
+
+<details>
+    <summary>Delete favorite</summary>
+
+__Headers__
+
+    URI: /api/faivorite/:favorit_id
+    Method: DELTE
+
+__Response__
+
+    - status: 201
+
+    response: 
+        {"message":"success"}
+
+    - status 401 Unauthorized when user is not logged in
+    - status 403 Forbidden when user is not owner
 
 </details>
 
@@ -114,24 +267,15 @@ __Response__
 
 </details>
 
+## Web Socket connection
+
 <details >
-    <summary>Get all favorites</summary>
+    <summary>Live update on order's status</summary>
 
-__Headers__
+__on_message__
 
-    URI: /api/session/favorites
-    Method: GET
-
-__Response__
-
-    status: 200
-
-    response: 
-    [
-        {            
-            "name":String,
-            "image":String
-        }
-    ]
+    {            
+        "state":String
+    }
 
 </details>
