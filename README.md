@@ -6,7 +6,7 @@ Author: [Ihor Lazarkov](https://ihorlazarkov.github.io/IhorLazarkov/)
 
 ## Tech stack
 
-<details>
+<details open>
     <summary> Tech Stack</summary>
     
 <img src="https://skillicons.dev/icons?i=html,css,javascript,react,redux,sequelize,vite,npm,nodejs,nginx,postgres,sqlite,git,github,vscode" heigth="40"></img>
@@ -42,5 +42,96 @@ Author: [Ihor Lazarkov](https://ihorlazarkov.github.io/IhorLazarkov/)
   <summary>DB schema</summary>
 
 ![db schema](./docs/frono_romo_db_schema.png)
+
+</details>
+
+## API specifications
+
+<details>
+    <summary>Add a review</summary>
+
+__Headers__
+
+    URI: /api/review
+    Method: POST
+    Body: {
+        "user_id": Number,
+        "pizza_id: Number,
+        "rating": Number,
+        "review": String
+    }
+
+__Response__
+
+    status: 201
+
+    response: 
+        {"message":"success"}
+
+</details>
+
+<details>
+    <summary>Get all ingredients</summary>
+
+__Headers__
+
+    URI: /api/ingredients
+    Method: GET
+
+__Response__
+
+    status: 200
+
+    response: 
+    [
+        {            
+            "name":String,
+            "image":String,
+            "price":Number
+        }
+    ]
+</details>
+
+<details >
+    <summary>Get all favorites</summary>
+
+__Headers__
+
+    URI: /api/session/favorites
+    Method: GET
+
+__Response__
+
+    status: 200
+
+    response: 
+    [
+        {            
+            "name":String,
+            "image":String
+        }
+    ]
+
+</details>
+
+<details >
+    <summary>Get all favorites</summary>
+
+__Headers__
+
+    URI: /api/session/favorites
+    Method: GET
+
+__Response__
+
+    status: 200
+
+    response: 
+    [
+        {            
+            "name":String,
+            "image":String
+        }
+    ]
 
 </details>
