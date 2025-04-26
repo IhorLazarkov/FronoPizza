@@ -7,7 +7,7 @@ const router = require('express').Router();
  * @description Signup a User
  */
 router.post('/', async (req, res) => {
-    const { email, password, firstName, lastname } = req.body;
+    const { email, password, firstName, lastName } = req.body;
     const existingUser = await User.findOne({ where: { email } });
     if(existingUser){
         const errors = {}

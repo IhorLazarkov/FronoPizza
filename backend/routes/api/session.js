@@ -8,7 +8,7 @@ const router = require('express').Router();
  */
 router.post('/', async (req, res, next) => {
     const { email, password } = req.body;
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ where: { email } });
 
     if (!user || !bcrypt.compareSync(password, user.hashedPassword.toString())) {
         const err = new Error('Login failed');
@@ -19,10 +19,14 @@ router.post('/', async (req, res, next) => {
     }
 
     await setTokenCookie(res, user);
-    return res.json({
-        user
-    });
 
+    return res.json({
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt
+    });
 });
 
 /**
@@ -32,5 +36,22 @@ router.delete('/', (_req, res) => {
     res.clearCookie('token');
     return res.json({ message: "success" });
 });
+
+/**
+ * @description Restore session user
+ */
+router.get('/', (req, res) => {
+    const { user } = req;
+    if (user) {
+        return res.json({
+            email: user.email,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            createdAt: user.createdAt,
+            updatedAt: user.updatedAt
+        });
+    }
+    else { return res.json({ user: null }); }
+})
 
 module.exports = router;

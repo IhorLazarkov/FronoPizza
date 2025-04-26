@@ -14,7 +14,7 @@ const setTokenCookie = (res, user) => {
     username: user.username,
   };
   const token = jwt.sign(
-    { data: user },
+    { data: safeUser },
     secret,
     { expiresIn: parseInt(expiresIn) } // 604,800 seconds = 1 week
   );
@@ -45,9 +45,7 @@ const restoreUser = (req, res, next) => {
     try {
       const { id } = jwtPayload.data;
       req.user = await User.findByPk(id, {
-        attributes: {
-          include: ['email', 'createdAt', 'updatedAt']
-        }
+        attributes: ['email', 'firstName', 'lastName', 'createdAt', 'updatedAt']
       });
     } catch (e) {
       res.clearCookie('token');
@@ -157,26 +155,26 @@ const requireNotOwnerAuthorization = async (req, res, next) => {
   const userId = req.user.id;
 
   try {
-      const spot = await Spot.findByPk(spotId);
-      if (!spot) {
-          const err = new Error("Spot couldn't be found");
-          err.status = 404;
-          return next(err);
-      }
+    const spot = await Spot.findByPk(spotId);
+    if (!spot) {
+      const err = new Error("Spot couldn't be found");
+      err.status = 404;
+      return next(err);
+    }
 
-      // Check if the user owns the spot
-      if (spot.ownerId === userId) {
-          const err = new Error('Forbidden');
-          err.message = "You cannot book your own spot";
-          err.status = 403;
-          return next(err);
-      }
+    // Check if the user owns the spot
+    if (spot.ownerId === userId) {
+      const err = new Error('Forbidden');
+      err.message = "You cannot book your own spot";
+      err.status = 403;
+      return next(err);
+    }
 
-      // Add spot to the request object for reuse in the route
-      req.spot = spot;
-      next();
+    // Add spot to the request object for reuse in the route
+    req.spot = spot;
+    next();
   } catch (error) {
-      next(error);
+    next(error);
   }
 };
 
