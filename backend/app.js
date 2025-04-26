@@ -3,6 +3,7 @@ const routes = require('./routes');
 const cors = require('cors');
 const csurf = require('csurf');
 const helmet = require('helmet');
+const { ValidationError } = require('sequelize');
 
 const  { environment } = require('./config');
 const isProduction = environment === 'production';
