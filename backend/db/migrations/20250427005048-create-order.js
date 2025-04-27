@@ -20,6 +20,12 @@ module.exports = {
       pizza_id: {
         type: Sequelize.INTEGER
       },
+      ingredient_id: {
+        type: Sequelize.INTEGER
+      },
+      quantity: {
+        type: Sequelize.INTEGER
+      },
       status: {
         type: Sequelize.STRING
       },

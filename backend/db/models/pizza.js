@@ -10,26 +10,17 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Pizza.belongsToMany(models.Ingredient, {
-        through: 'PizzaIngredientes',
+      Pizza.belongsToMany(models.Ingredient,{
         foreignKey: 'pizza_id',
+        through: 'PizzaIngredients',
         onDelete: 'CASCADE',
-        hooks: true,
-      });
-      Pizza.belongsTo(models.Favorite, {
-        foreignKey: 'pizza_id',
-        onDelete: 'CASCADE',
-        hooks: true,
-      });
-      Pizza.belongsTo(models.Order, {
-        foreignKey: 'pizza_id',
-        onDelete: 'CASCADE',
-        hooks: true,
-      });
+        hooks: true
+      })
     }
   }
   Pizza.init({
     name: DataTypes.STRING,
+    description: DataTypes.STRING,
     price: DataTypes.INTEGER,
     image: DataTypes.STRING
   }, {
