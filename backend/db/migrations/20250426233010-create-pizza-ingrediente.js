@@ -1,8 +1,13 @@
 'use strict';
 /** @type {import('sequelize-cli').Migration} */
+const options = { tableName: "PizzaIngredientes" };
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
+
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('PizzaIngredientes', {
+    await queryInterface.createTable(options, {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -26,6 +31,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('PizzaIngredientes');
+    await queryInterface.dropTable(options);
   }
 };

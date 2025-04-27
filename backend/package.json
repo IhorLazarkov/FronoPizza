@@ -7,9 +7,11 @@
     "sequelize": "sequelize",
     "sequelize-cli": "sequelize-cli",
     "start": "per-env",
-    "start:development": "nodemon ./bin/www",
+    "start:development": "npx dotenv sequelize db:migrate:undo:all && npm run migrate && npm run seed && nodemon ./bin/www",
     "start:production": "node ./bin/www",
-    "build": "node psql-setup-script.js"
+    "build": "node psql-setup-script.js",
+    "migrate":"npx dotenv sequelize-cli db:migrate",
+    "seed":"npx dotenv sequelize-cli db:seed:all"
   },
   "keywords": [],
   "author": "ilazarkov@gmail.com",

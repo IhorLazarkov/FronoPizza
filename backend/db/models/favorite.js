@@ -10,7 +10,12 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Favorite.hasMany(models.User, {
+        foreignKey: 'user_id',
+      });
+      Favorite.hasMany(models.Pizza, {
+        foreignKey: 'pizza_id',
+      });
     }
   }
   Favorite.init({

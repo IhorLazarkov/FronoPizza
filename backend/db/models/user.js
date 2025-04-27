@@ -10,17 +10,17 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      User.hasMany(models.Favorite, {
+      User.belongsTo(models.Order, {
         foreignKey: 'user_id',
         onDelete: 'CASCADE',
         hooks: true,
       });
-      User.hasMany(models.Order, {
+      User.belongsTo(models.Review, {
         foreignKey: 'user_id',
         onDelete: 'CASCADE',
         hooks: true,
       });
-      User.hasMany(models.Review, {
+      User.belongsTo(models.Favorite, {
         foreignKey: 'user_id',
         onDelete: 'CASCADE',
         hooks: true,

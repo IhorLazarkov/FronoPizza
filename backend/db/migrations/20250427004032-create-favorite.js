@@ -1,8 +1,13 @@
 'use strict';
 /** @type {import('sequelize-cli').Migration} */
+const options = { tableName: "Favorites" };
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
+
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Favorites', {
+    await queryInterface.createTable(options, {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -26,6 +31,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Favorites');
+    await queryInterface.dropTable(options);
   }
 };

@@ -16,12 +16,12 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE',
         hooks: true,
       });
-      Pizza.hasMany(models.Favorite, {
+      Pizza.belongsTo(models.Favorite, {
         foreignKey: 'pizza_id',
         onDelete: 'CASCADE',
         hooks: true,
       });
-      Pizza.belongsToMany(models.Order, {
+      Pizza.belongsTo(models.Order, {
         foreignKey: 'pizza_id',
         onDelete: 'CASCADE',
         hooks: true,

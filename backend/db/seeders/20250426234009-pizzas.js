@@ -55,10 +55,10 @@ module.exports = {
       // Cleanup Pizza and its ingredients
       await pizza.destroy();
 
-      // Cleanup the PizzaIngredientes table
-      await PizzaIngrediente.destroy({
-        where: { pizza_id: pizza.id },
-      });
+      // // Cleanup the PizzaIngredientes table
+      // await PizzaIngrediente.destroy({
+      //   where: { pizza_id: pizza.id },
+      // });
     });
   }
 };
