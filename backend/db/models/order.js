@@ -13,14 +13,19 @@ module.exports = (sequelize, DataTypes) => {
       Order.belongsTo(models.User, {
         foreignKey: 'user_id',
       });
-      Order.hasMany(models.Pizza, {
+      Order.belongsTo(models.Pizza, {
         foreignKey: 'pizza_id',
+      });
+      Order.belongsTo(models.Ingredient, {
+        foreignKey: 'ingredient_id',
       });
     }
   }
   Order.init({
     user_id: DataTypes.INTEGER,
     pizza_id: DataTypes.INTEGER,
+    ingredient_id: DataTypes.INTEGER,
+    quantity: DataTypes.INTEGER,
     status: DataTypes.STRING
   }, {
     sequelize,

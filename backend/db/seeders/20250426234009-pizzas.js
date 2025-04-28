@@ -1,9 +1,5 @@
 'use strict';
-const options = { tableName: "Pizzas" };
-if (process.env.NODE_ENV === 'production') {
-  options.schema = process.env.SCHEMA;  // define your schema in options object
-}
-const { Pizza , Ingredient, PizzaIngrediente } = require('../models');
+const { Pizza, Ingredient, PizzaIngredient } = require('../models');
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -20,7 +16,8 @@ module.exports = {
     const pizza = await Pizza.create({
       name: 'Pizza Margherita',
       price: 10,
-      image: 'https://example.com/pizza-margherita.jpg'
+      image: 'https://example.com/pizza-margherita.jpg',
+      description: 'A classic Italian pizza with tomato sauce, mozzarella cheese, and fresh basil.'
     });
     const ingredients = await Ingredient.bulkCreate([
       {
@@ -56,7 +53,7 @@ module.exports = {
       await pizza.destroy();
 
       // Cleanup the PizzaIngredientes table
-      await PizzaIngrediente.destroy({
+      await PizzaIngredient.destroy({
         where: { pizza_id: pizza.id },
       });
     });

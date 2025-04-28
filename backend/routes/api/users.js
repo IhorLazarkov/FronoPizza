@@ -24,7 +24,12 @@ router.post('/', async (req, res) => {
 
     await serTokenCookie(res, user);
     return res.status(201).json({
-        user
+        id: user.id,
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt
     });
 });
 

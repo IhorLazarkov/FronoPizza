@@ -45,7 +45,7 @@ const restoreUser = (req, res, next) => {
     try {
       const { id } = jwtPayload.data;
       req.user = await User.findByPk(id, {
-        attributes: ['email', 'firstName', 'lastName', 'createdAt', 'updatedAt']
+        attributes: ['id','email', 'firstName', 'lastName', 'createdAt', 'updatedAt']
       });
     } catch (e) {
       res.clearCookie('token');
@@ -120,36 +120,6 @@ const requireReviewAuthorization = async (req, res, next) => {
   }
 };
 
-const requireSpotImageAuthorization = async (req, res, next) => {
-
-  const { imageId } = req.params;
-  const { id: userId } = req.user;
-
-  try {
-    const spotImage = await SpotImage.findByPk(imageId, {
-      include: [{ model: Spot }]
-    });
-    if (!spotImage) {
-      const error = new Error("Spot Image couldn't be found")
-      error.status = 404
-      error.title = "Spot Image couldn't be found"
-      error.errors = { message: "Spot Image couldn't be found" }
-      return next(error)
-    }
-
-    if (spotImage.Spot.ownerId !== userId) {
-      const err = new Error('Forbbiden');
-      err.title = 'Forbidden';
-      err.errors = { message: 'Forbidden' }
-      err.status = 403;
-      return next(err);
-    }
-    next();
-  } catch (error) {
-    next(error);
-  }
-};
-
 const requireNotOwnerAuthorization = async (req, res, next) => {
   const { spotId } = req.params;
   const userId = req.user.id;
@@ -184,6 +154,5 @@ module.exports = {
   requireAuth,
   requireAuthorization,
   requireReviewAuthorization,
-  requireSpotImageAuthorization,
   requireNotOwnerAuthorization
 };
