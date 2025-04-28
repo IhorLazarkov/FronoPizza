@@ -16,6 +16,11 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE',
         hooks: true
       })
+      Pizza.hasMany(models.Review, {
+        foreignKey: 'pizza_id',
+        onDelete: 'CASCADE',
+        hooks: true
+      })
     }
   }
   Pizza.init({
