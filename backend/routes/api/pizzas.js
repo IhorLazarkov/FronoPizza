@@ -58,10 +58,14 @@ router.get("/:id", async (req, res, next) => {
       error.message = `Pizza with id ${id} not found`;
       return next(error);
     }
-    
+
     res.json(pizza);
+    
   } catch (error) {
-    next(new Error(`Error get pizza by id: ${error}`));
+    const err = new Error()
+    err.status = 500;
+    err.message = `Error get pizza by id: ${error}`;
+    next(err);
   }
 });
 
