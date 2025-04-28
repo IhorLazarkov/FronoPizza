@@ -17,7 +17,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Ingredient.init({
-    name: DataTypes.STRING,
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
+    },
     price: DataTypes.INTEGER,
     image: DataTypes.STRING,
   }, {
