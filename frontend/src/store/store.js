@@ -2,6 +2,7 @@ import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import { thunk } from "redux-thunk";
 import sessionReducer from "./session";
 import pizzasReducer from "./pizzas";
+import cartReducer from "./cart";
 
 let enhancer;
 if (import.meta.env.MODE === "production") {
@@ -16,6 +17,7 @@ if (import.meta.env.MODE === "production") {
 const reducers = combineReducers({
     user: sessionReducer,
     pizzas: pizzasReducer,
+    cart: cartReducer
 });
 
 const configureStore = (preloadedState) => {
