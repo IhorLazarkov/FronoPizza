@@ -1,15 +1,15 @@
 import './LandingPage.css';
 
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchPizzas } from '../../store/pizzas';
-import { addToCart, clearCart } from '../../store/cart';
-
 import { MdOutlineMessage } from "react-icons/md";
 import { AiOutlineLike } from "react-icons/ai";
 import { CiShoppingBasket } from "react-icons/ci";
 import { IoCloseCircle } from "react-icons/io5";
 
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPizzas } from '../../store/pizzas';
+import { addToCart, clearCart } from '../../store/cart';
+import { useNavigate } from 'react-router-dom';
 
 function LandingPage() {
   const dispatch = useDispatch();
@@ -20,9 +20,11 @@ function LandingPage() {
   const [error, setError] = useState({ message: "", errors: [] });
   const [showBasket, setShowBasket] = useState(false);
 
-  const addCartHandler = (pizza) => {
-    dispatch(addToCart(pizza))
-  }
+  const navigator = useNavigate()
+
+  const goToCart = () => navigator("/mycart")
+
+  const addCartHandler = (pizza) => dispatch(addToCart(pizza))
 
   useEffect(() => {
     dispatch(fetchPizzas())
@@ -41,8 +43,14 @@ function LandingPage() {
 
   return (
     <div style={{ position: "relative" }}>
-      <div className={`basket ${showBasket ? "basket-show" : ""}`} >
-        <IoCloseCircle style={{ fontSize: "1.3rem" }} onClick={() => dispatch(clearCart())} />
+      <div
+        className={`basket ${showBasket ? "basket-show" : ""}`}
+        onClick={goToCart} >
+
+        <IoCloseCircle style={{ fontSize: "1.3rem" }} onClick={(e) => {
+          e.stopPropagation()
+          dispatch(clearCart())
+        }} />
         <CiShoppingBasket />
         {inCard}
       </div>

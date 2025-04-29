@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { login, logout } from './store/session'
 import LandingPage from './components/LandingPage'
+import { MyCart } from './components/MyCart/MyCart'
 
 function Login() {
   const dispatch = useDispatch()
@@ -54,6 +55,14 @@ const router = createBrowserRouter(
     {
       path: "/",
       element: <LandingPage />,
+    },
+    {
+      path: "login",
+      element: <Login />,
+    },
+    {
+      path: "mycart",
+      element: <MyCart />,
     }
   ]
 );
