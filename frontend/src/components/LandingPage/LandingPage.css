@@ -17,7 +17,6 @@
 
   & img {
     width: 100%;
-    height: auto;
     object-fit: cover;
   }
 
@@ -65,4 +64,18 @@
     height: 2.5rem;
     font-size: 1rem;
   }
+}
+
+.basket {
+  cursor: pointer;
+  font-size: 4rem;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateY(-120%);
+  transition: transform 0.4s cubic-bezier(0.60, 0.10, 1.00, 2.00);
+}
+
+.basket-show {
+  transform: translateY(0);
 }

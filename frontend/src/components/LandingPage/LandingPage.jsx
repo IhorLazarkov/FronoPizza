@@ -5,24 +5,28 @@ import { fetchPizzas } from '../../store/pizzas';
 
 import { MdOutlineMessage } from "react-icons/md";
 import { AiOutlineLike } from "react-icons/ai";
+import { CiShoppingBasket } from "react-icons/ci";
 
 function LandingPage() {
   const dispatch = useDispatch();
   const pizzas = useSelector(state => state.pizzas);
   const [pizzasState, setPizzas] = useState(pizzas || {});
   const [error, setError] = useState({ message: "", errors: [] });
+  const [showBasket, setShowBasket] = useState(false);
 
   useEffect(() => {
     dispatch(fetchPizzas())
       .then(response => setPizzas(response))
       .catch(error => {
-        console.error({ err: error });
         setError({ ...error.message })
       });
   }, [dispatch]);
 
   return (
-    <div>
+    <div style={{ position: "relative" }}>
+      <div className={`basket ${showBasket ? "basket-show" : ""}`} >
+        <CiShoppingBasket />
+      </div>
       <span>Landing Page</span>
       <section id='pizzas_container'>
 
@@ -50,7 +54,9 @@ function LandingPage() {
                 <span><AiOutlineLike /> {pizza.avgRating}</span>
               </div>
             </div>
-            <button className='primary'>Add</button>
+            <button 
+            className='primary'
+            onClick={e => setShowBasket(true)}>Add</button>
           </div>
         ))}
       </section>
