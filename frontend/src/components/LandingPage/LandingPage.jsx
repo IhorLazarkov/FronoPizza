@@ -23,7 +23,7 @@ function LandingPage() {
 
   return (
     <div>
-      <h1>Landing Page</h1>
+      <span>Landing Page</span>
       <section id='pizzas_container'>
 
         {pizzasState && Object.values(pizzasState).map(pizza => (

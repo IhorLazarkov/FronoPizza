@@ -16,6 +16,15 @@
   --sub-secondary-v1: #fdf7f2;
   --third-v1: #333333;
 }
+button{
+  cursor: pointer;
+}
+button:hover{
+  opacity: 0.8;
+}
+button:active{
+  opacity: 0.6;
+}
 
 button.primary {
   background-color: var(--secondary-v1);
