@@ -1,10 +1,8 @@
-
 const {
   Pizza,
   Ingredient,
   Review,
-  User,
-  sequelize
+  User
 } = require("../../db/models");
 
 const router = require("express").Router();
@@ -13,19 +11,38 @@ const router = require("express").Router();
  * @description Get all pizzas
  */
 router.get("/", async (_req, res, next) => {
-  try {
 
+  try {
     const pizzas = await Pizza.findAll({
       include: [{
+        model: Ingredient,
+        attributes: ['id', 'name']
+      }, {
         model: Review,
-        attributes: [
-          [sequelize.fn('COUNT', sequelize.col('Reviews.id')), 'reviewsCount'],
-          [sequelize.fn('AVG', sequelize.col('Reviews.rating')), 'rating']
-        ]
+        attributes: ['rating', 'review']
       }]
     });
+    const result = pizzas.map(p => {
+      const pizza = {}
+      pizza.id = p.id
+      pizza.name = p.name
+      pizza.description = p.description
+      pizza.price = p.price
+      pizza.image = p.image
 
-    res.json(pizzas);
+      // Ingredients
+      pizza.ingredients = p.Ingredients.map(i => ({
+        id: i.id,
+        name: i.name
+      }))
+
+      //Reviews
+      pizza.totalReviews = p.Reviews.length
+      pizza.avgRating = p.Reviews.reduce((acc, review) => acc + review.rating, 0) / p.Reviews.length
+
+      return pizza;
+    })
+    res.json(result);
   } catch (error) {
     next(new Error(`Error get all pizzas: ${error}`));
   }
@@ -60,7 +77,7 @@ router.get("/:id", async (req, res, next) => {
     }
 
     res.json(pizza);
-    
+
   } catch (error) {
     const err = new Error()
     err.status = 500;

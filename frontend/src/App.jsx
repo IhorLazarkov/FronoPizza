@@ -1,9 +1,11 @@
+import './App.css'
+import { Outlet, RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { login, logout } from './store/session'
-import './App.css'
+import LandingPage from './components/LandingPage'
 
-function App() {
+function Login() {
   const dispatch = useDispatch()
   const user = useSelector(state => state.user)
 
@@ -44,6 +46,21 @@ function App() {
         <input type="button" value="Logout" onClick={onLogout} />
       </form>
     </>
+  )
+}
+
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <LandingPage />,
+    }
+  ]
+);
+
+function App() {
+  return (
+    <RouterProvider router={router} />
   )
 }
 

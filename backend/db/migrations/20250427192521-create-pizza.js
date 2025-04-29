@@ -24,7 +24,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       image: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
