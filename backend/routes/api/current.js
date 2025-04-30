@@ -1,5 +1,13 @@
 const router = require('express').Router();
-const { Review, User, Favorite, Pizza, Order, Ingredient } = require('../../db/models');
+const { 
+    User, 
+    Review, 
+    Favorite, 
+    Pizza, 
+    Ingredient,
+    Order, 
+    OrderItem, 
+ } = require('../../db/models');
 
 router.get('/reviews', async (req, res) => {
     const reviews = await Review.findAll({
@@ -13,7 +21,6 @@ router.get('/reviews', async (req, res) => {
 
 router.get('/favorites', async (req, res) => {
     const { user } = req;
-    console.log({ user });
     const favorites = await Favorite.findAll({
         where: {
             user_id: user.id
@@ -29,24 +36,40 @@ router.get('/favorites', async (req, res) => {
     res.json(favorites);
 });
 
-router.get('/orders', async (req, res) => {
+router.get('/orders', async (req, res, next) => {
     const { user } = req;
-    const orders = await Order.findAll({
-        where: {
-            user_id: user.id
-        },
-        include: [{
-            model: User,
-            attributes: []
-        }, {
-            model: Pizza,
-            attributes: ['id', 'name', 'price', 'image']
-        }, {
-            model: Ingredient,
-            attributes: ['id', 'name', 'image', 'price']
-        }]
-    });
-    res.json(orders);
+    if(!user){
+        return res.status(403).json({
+            message: 'Get orders not avaiilable for guests'
+        })
+    }
+    try {
+        const orders = await Order.findAll({
+            where: {
+                user_id: req.user.id
+            },
+            include: [
+                {
+                    model: OrderItem,
+                    attributes: ['quantity'],
+                    include: [
+                        {
+                            model: Pizza,
+                            attributes: ['name', 'price'],
+                        },
+                        {
+                            model: Ingredient,
+                            attributes: ['name', 'price'],
+                        }
+                    ]
+                },
+            ],
+            attribute: ['id', 'totalPrice', 'updatedAt'],
+        })
+        res.json(orders)
+    } catch (err) {
+        next(err)
+    }
 });
 
 module.exports = router;

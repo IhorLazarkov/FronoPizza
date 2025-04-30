@@ -1,5 +1,11 @@
 'use strict';
-const { Order, User, Pizza, Ingredient } = require('../models');
+const {
+  User,
+  Pizza,
+  Ingredient,
+  Order,
+  OrderItem,
+} = require('../models');
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -15,12 +21,20 @@ module.exports = {
     const user = await User.findOne();
     const pizza = await Pizza.findOne();
     const ingredient = await Ingredient.findOne();
-    await Order.create({
+    const order = await Order.create({
       user_id: user.id,
+      totalPrice: 100,
+      // status: use default value
+    });
+    await OrderItem.create({
+      order_id: order.id,
       pizza_id: pizza.id,
+      quantity: 1,
+    });
+    await OrderItem.create({
+      order_id: order.id,
       ingredient_id: ingredient.id,
       quantity: 1,
-      status: 'pending'
     });
   },
 
