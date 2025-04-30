@@ -13,7 +13,7 @@ router.post('/', async (req, res, next) => {
     for (const pizza of pizzas) {
         if (!aggregatePizzas[pizza.id]) {
             aggregatePizzas[pizza.id] = {
-                quantity: pizza.quantity
+                quantity: 1
             }
         } else {
             aggregatePizzas[pizza.id].quantity += 1
@@ -48,7 +48,6 @@ router.post('/', async (req, res, next) => {
 
         // Create order items for pizzas
         for (item in aggregatePizzas) {
-            console.log({ pizza: item });
             await OrderItem.create({
                 order_id: order.id,
                 pizza_id: item,
@@ -58,7 +57,6 @@ router.post('/', async (req, res, next) => {
 
         // Create order items for ingredients
         for (item in aggregateIngredients) {
-            console.log({ ingredient: item });
             await OrderItem.create({
                 order_id: order.id,
                 ingredient_id: item,
@@ -82,6 +80,7 @@ router.post('/', async (req, res, next) => {
     }
 
     res.status(201).json({
+        order_id: order.id,
         pizzas: aggregatePizzas,
         ingredients: aggregateIngredients,
         totalPrice

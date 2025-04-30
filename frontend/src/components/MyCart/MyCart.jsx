@@ -1,16 +1,26 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { getCart } from "../../store/cart"
+import { createOrder, getCart } from "../../store/cart"
 import { useNavigate } from 'react-router-dom';
 
 export function MyCart() {
     const cart = useSelector(state => state.cart)
     const dispatch = useDispatch()
     const [cartItems, setCartItems] = useState(cart || [])
+    const [error, setError] = useState({})
 
     const navigator = useNavigate()
     // Checkout
-    const checkOutHandler = () => navigator("/orderlive")
+    const checkOutHandler = () => {
+        dispatch(createOrder({
+            pizzas: cartItems,
+            ingredients: []
+        })).then(res => {
+            navigator(`/orderlive/${res.order_id}`)
+        }).catch(err => {
+            setError(err.message);
+        })
+    }
     // Go back to shopping
     const continueHandler = () => navigator("/")
 
@@ -36,7 +46,8 @@ export function MyCart() {
                 Total: {cartItems.reduce((acc, cur) => acc + cur.pizza.price, 0)}
             </div>
             <button className="primary" onClick={checkOutHandler}>Checkout</button>
-            <button className="secondary" onClick={continueHandler}>Continue Shoping</button>
+            <button className="critical" onClick={continueHandler}>Back to Shopping</button>
+            <div style={{color:"red", borderColor:"red", fontSize:"1.5rem"}}>{error.message}</div>
         </div>
     )
 }

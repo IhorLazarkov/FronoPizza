@@ -66,7 +66,7 @@ const router = createBrowserRouter(
       element: <MyCart />,
     },
     {
-      path: "orderlive",
+      path: "orderlive/:id",
       element: <OrderLivePage />,
     }
   ]
