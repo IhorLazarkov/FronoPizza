@@ -1,3 +1,3 @@
-const MyCart = require('./MyCart')
+import MyCart from './MyCart'
 
-module.exports = MyCart
+export default MyCart;

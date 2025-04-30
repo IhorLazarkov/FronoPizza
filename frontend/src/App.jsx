@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import { login, logout } from './store/session'
 import LandingPage from './components/LandingPage'
 import { MyCart } from './components/MyCart/MyCart'
+import OrderLivePage from './components/OrderLive/OrderLivePage'
 
 function Login() {
   const dispatch = useDispatch()
@@ -63,6 +64,10 @@ const router = createBrowserRouter(
     {
       path: "mycart",
       element: <MyCart />,
+    },
+    {
+      path: "orderlive",
+      element: <OrderLivePage />,
     }
   ]
 );
