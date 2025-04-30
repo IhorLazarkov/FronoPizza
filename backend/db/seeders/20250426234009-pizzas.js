@@ -16,7 +16,7 @@ module.exports = {
     const pizza = await Pizza.create({
       name: 'Pizza Margherita',
       price: 10,
-      image: 'https://example.com/pizza-margherita.jpg',
+      image: 'https://safrescobaldistatic.blob.core.windows.net/media/2022/11/PIZZA-MARGHERITA.jpg',
       description: 'A classic Italian pizza with tomato sauce, mozzarella cheese, and fresh basil.'
     });
     const ingredients = await Ingredient.bulkCreate([

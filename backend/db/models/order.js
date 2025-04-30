@@ -13,20 +13,24 @@ module.exports = (sequelize, DataTypes) => {
       Order.belongsTo(models.User, {
         foreignKey: 'user_id',
       });
-      Order.belongsTo(models.Pizza, {
-        foreignKey: 'pizza_id',
-      });
-      Order.belongsTo(models.Ingredient, {
-        foreignKey: 'ingredient_id',
+      Order.hasMany(models.OrderItem, {
+        foreignKey: 'order_id',
+        onDelete: 'CASCADE',
+        hooks: true
       });
     }
   }
   Order.init({
-    user_id: DataTypes.INTEGER,
-    pizza_id: DataTypes.INTEGER,
-    ingredient_id: DataTypes.INTEGER,
-    quantity: DataTypes.INTEGER,
-    status: DataTypes.STRING
+    user_id: {
+      type: DataTypes.INTEGER,
+      defaultValue: 1, // Demo user
+    },
+    totalPrice: DataTypes.INTEGER,
+    status: {
+      type: DataTypes.STRING,
+      defaultValue: 'accepted',
+      isIn: [['accepted', 'preparing', 'in oven', 'ready']]
+    }
   }, {
     sequelize,
     modelName: 'Order',

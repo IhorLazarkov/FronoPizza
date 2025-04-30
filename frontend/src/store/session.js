@@ -1,4 +1,3 @@
-
 import { csrfFetch } from "./csrf.js";
 
 const loginAction = "user/LOGIN"
@@ -78,7 +77,7 @@ export const restoreUser = () => async (dispatch) => {
     return response;
 }
 
-export default function session(state = {}, action) {
+export default function sessionReducer(state = {}, action) {
     switch (action.type) {
         case loginAction:
             return { ...action.user };

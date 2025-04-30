@@ -17,17 +17,12 @@ module.exports = {
       user_id: {
         type: Sequelize.INTEGER
       },
-      pizza_id: {
-        type: Sequelize.INTEGER
-      },
-      ingredient_id: {
-        type: Sequelize.INTEGER
-      },
-      quantity: {
+      totalPrice: {
         type: Sequelize.INTEGER
       },
       status: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        defaultValue: 'accepted'
       },
       createdAt: {
         allowNull: false,

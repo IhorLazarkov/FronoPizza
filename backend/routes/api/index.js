@@ -6,6 +6,7 @@ const pizzaRouter = require('./pizzas.js');
 const reviewRouter = require('./reviews.js');
 const currentRouter = require('./current.js');
 const ingredientRouter = require('./ingredients.js');
+const orderRouter = require('./orders.js');
 
 // Connect restoreUser middleware to the API router
 // If current user session is valid, set req.user to the user in the database
@@ -23,5 +24,7 @@ router.use('/reviews', reviewRouter);
 router.use('/current', currentRouter);
 
 router.use('/ingredients', ingredientRouter);
+
+router.use('/orders', orderRouter);
 
 module.exports = router;
