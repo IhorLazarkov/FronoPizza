@@ -1,15 +1,19 @@
 const router = require("express").Router();
 const {
-    Ingredient
+    Ingredient,
+    Pizza
 } = require("../../db/models");
 
 /**
- * @description Get all ingredients
+ * @description Get all ingredients that are not in a pizza
  */
 router.get("/", async (_req, res, next) => {
     try {
-        const ingredients = await Ingredient.findAll();
-        res.json(ingredients);
+        const ingredients = await Ingredient.findAll({
+            attributes: ["id", "name", "image", "price"],
+            include: { model: Pizza },
+        });
+        res.json(ingredients.filter(i => !i.Pizzas.length));
     } catch (error) {
         next(new Error(`Error get all ingredients: ${error}`));
     }
