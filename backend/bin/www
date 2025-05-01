@@ -1,8 +1,12 @@
 require('dotenv').config();
 
-const { port } = require('../config');
+const {
+  port,
+  websocket_port
+} = require('../config');
 
 const app = require('../app');
+const app_ws = require('../app_ws');
 const db = require('../db/models');
 
 // Check the database connection before starting the app
@@ -12,7 +16,15 @@ db.sequelize
     console.log('Database connection success! Sequelize is ready to use...');
 
     // Start listening for connections
-    app.listen(port, () => console.log(`Listening on port ${port}...`));
+    app.listen(port, () => {
+      console.log(`Listening on port ${port}...`)
+
+      // Start listening for WebSocket connections
+      app_ws.listen(websocket_port, () => {
+
+        console.log(`Web socket listening on port ${websocket_port}...`);
+      });
+    });
   })
   .catch((err) => {
     console.log('Database connection failure.');
