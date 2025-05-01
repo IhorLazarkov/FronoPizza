@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 export default function OrderLivePage() {
   const { id } = useParams();
-  const [status, setStatus] = useState("loading ...");
+  const [status, setStatus] = useState("connecting to server...");
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ export default function OrderLivePage() {
     ws.onerror = (err) => {
       setError(`Connection error: ${JSON.stringify(err)}`);
     }
-    
+
     ws.onclose = () => {
       console.log("connection closed");
     }
