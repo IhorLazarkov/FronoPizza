@@ -66,10 +66,11 @@ function LandingPage() {
         <CiShoppingBasket />
         {inCard}
       </div>
-      <span style={{position:"absolute"}}>Landing Page</span>
+      <span style={{ position: "absolute" }}>Landing Page</span>
 
       {/* Pizzas */}
       <section id='pizzas_container'>
+        <span className='banner'>Pizzas</span>
         {pizzasState && Object.values(pizzasState).map(pizza => (
           <div className="pizza_card" key={pizza.id}>
             <h2>{pizza.name}</h2>
@@ -105,6 +106,7 @@ function LandingPage() {
 
       {/* Ingredients */}
       <section id="ingredients_container">
+      <span className='banner'>Add-ons</span>
         {ingredientsState && Object.values(ingredientsState).map(ingredient => (
           <div className='ingredient_card' key={ingredient.id}>
             <div className="img_container">
