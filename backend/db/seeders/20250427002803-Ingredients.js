@@ -8,22 +8,22 @@ const ingredients = [
   {
     name: 'Parmesan Cheese',
     price: 2,
-    image: 'https://example.com/cheese.jpg'
+    image: 'https://assets.clevelandclinic.org/transform/LargeFeatureImage/0a272376-d2c4-4936-8239-7c7ef2e5b4e9/ParmesanCheese-471343790-770x533-1_jpg'
   },
   {
     name: 'Olive Oil',
     price: 1,
-    image: 'https://example.com/olive-oil.jpg'
+    image: 'https://www.health.com/thmb/VD31swL_h-hrJYyYZ8FRE9-VL-o=/750x0/filters:no_upscale():max_bytes(150000):strip_icc()/evoo-7c819bcdd0c343a7bae114cbc9baea2f.jpg'
   },
   {
     name: 'Garlic Sauce',
     price: 1,
-    image: 'https://example.com/garlic.jpg'
+    image: 'https://www.allrecipes.com/thmb/WPQvfZ5wDvdpvHb2_bgZP3dxfHg=/0x512/filters:no_upscale():max_bytes(150000):strip_icc()/AR-81240-creamy-garlic-sauce-DDMFS-4x3-Beauty-6ca78d6c44f94c86af9607cf323e2968.jpg'
   },
   {
     name: 'Tomato Sauce',
     price: 1,
-    image: 'https://example.com/tomato-sauce.jpg'
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Fresh_Tomato_Sauce_%28Unsplash%29.jpg/500px-Fresh_Tomato_Sauce_%28Unsplash%29.jpg'
   }
 ];
 /** @type {import('sequelize-cli').Migration} */

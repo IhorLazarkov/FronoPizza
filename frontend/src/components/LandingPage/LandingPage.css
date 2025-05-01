@@ -1,4 +1,5 @@
-#pizzas_container {
+#pizzas_container,
+#ingredients_container {
   border: 0px solid black;
   display: grid;
   width: 100%;
@@ -6,7 +7,16 @@
   grid-gap: 5px;
 }
 
-.pizza_card {
+#ingredients_container {
+  grid-template-columns: repeat(auto-fill, clamp(200px, 300px, 15%));
+}
+
+#ingredients_container {
+  margin-top: 5px;
+}
+
+.pizza_card,
+.ingredient_card {
   --padding: 0 20px;
   text-decoration: none;
   cursor: pointer;
@@ -14,11 +24,11 @@
   background-color: var(--sub-secondary-v1);
   width: fit-content;
   box-shadow: 2px 10px 10px 5px rgba(0, 0, 0, 0.2);
-  
-  & .img_container{
+
+  & .img_container {
     overflow: hidden;
   }
-  
+
   & img {
     width: 100%;
     object-fit: cover;
@@ -77,7 +87,18 @@
     transform: scale(1.5);
   }
 }
+.ingredient_card{
+  cursor: inherit;
+  
+  & .img_container{
+    height: 9rem;
+  }
 
+  & img{
+    width: 100%;
+    object-fit: cover;
+  }
+}
 .basket {
   cursor: pointer;
   font-size: 4rem;
@@ -85,7 +106,7 @@
   top: 0;
   left: 50%;
   transform: translateY(-120%);
-  transition: transform 0.4s cubic-bezier(0.60, 0.10, 1.00, 2.00);
+  transition: transform 0.4s cubic-bezier(0.6, 0.1, 1, 2);
 }
 
 .basket-show {
