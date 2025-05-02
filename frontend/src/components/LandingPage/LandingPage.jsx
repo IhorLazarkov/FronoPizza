@@ -65,7 +65,7 @@ function LandingPage() {
           dispatch(clearCart())
         }} />
         <CiShoppingBasket />
-        {inCard}
+        <span>{inCard}</span>
       </div>
       <span style={{ position: "absolute" }}>Landing Page</span>
 
