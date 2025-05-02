@@ -70,7 +70,8 @@ export const restoreUser = () => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json();
-        dispatch({ type: restoreAction, user: data });
+        const {user} = data
+        dispatch({ type: restoreAction, user });
         return response;
     }
 
@@ -80,11 +81,9 @@ export const restoreUser = () => async (dispatch) => {
 export default function sessionReducer(state = {}, action) {
     switch (action.type) {
         case loginAction:
-            return { ...action.user };
         case logoutAction:
-            return action.user;
         case restoreAction:
-            return action.user;
+            return {...action.user };
         default:
             return state;
     }

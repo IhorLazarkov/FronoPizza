@@ -2,32 +2,23 @@ import './LandingPage.css';
 
 import { MdOutlineMessage } from "react-icons/md";
 import { AiOutlineLike } from "react-icons/ai";
-import { CiShoppingBasket } from "react-icons/ci";
-import { IoCloseCircle } from "react-icons/io5";
 
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPizzas } from '../../store/pizzas';
 import { addIngredientToCart, addPizzaToCart, clearCart } from '../../store/cart';
 import { getIngredients } from '../../store/ingredients';
-import { useNavigate } from 'react-router-dom';
 
 function LandingPage() {
 
   const dispatch = useDispatch();
-  const cart = useSelector(state => state.cart);
   const pizzas = useSelector(state => state.pizzas);
   const ingredients = useSelector(state => state.ingredients);
 
-  const [inCard, setInCard] = useState(0);
   const [pizzasState, setPizzas] = useState(pizzas || {});
   const [ingredientsState, setIngredients] = useState(ingredients || {});
 
   const [error, setError] = useState({ message: "", errors: [] });
-  const [showBasket, setShowBasket] = useState(false);
-
-  const navigator = useNavigate()
-  const goToCart = () => navigator("/mycart")
 
   const addPizzaCartHandler = (pizza) => dispatch(addPizzaToCart(pizza))
   const addIngredientCartHandler = (ingredient) => dispatch(addIngredientToCart(ingredient))
@@ -46,29 +37,10 @@ function LandingPage() {
 
   }, [dispatch]);
 
-  useEffect(() => {
-    setInCard(() => {
-      const total = cart.pizzas.length + cart.ingredients.length
-      total > 0 ? setShowBasket(true) : setShowBasket(false)
-      return total
-    })
-  }, [cart.pizzas.length + cart.ingredients.length])
 
   return (
     <div style={{ position: "relative" }}>
-      <div
-        className={`basket ${showBasket ? "basket-show" : ""}`}
-        onClick={goToCart} >
 
-        <IoCloseCircle
-          style={{ fontSize: "1.3rem" }}
-          onClick={(e) => {
-            e.stopPropagation()
-            dispatch(clearCart())
-          }} />
-        <CiShoppingBasket />
-        <span>{inCard}</span>
-      </div>
       <span style={{ position: "absolute" }}>Landing Page</span>
 
       {/* Pizzas */}
