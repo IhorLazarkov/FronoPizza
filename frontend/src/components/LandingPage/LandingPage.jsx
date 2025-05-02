@@ -8,7 +8,7 @@ import { IoCloseCircle } from "react-icons/io5";
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPizzas } from '../../store/pizzas';
-import { addToCart, clearCart } from '../../store/cart';
+import { addIngredientToCart, addPizzaToCart, clearCart } from '../../store/cart';
 import { getIngredients } from '../../store/ingredients';
 import { useNavigate } from 'react-router-dom';
 
@@ -29,8 +29,8 @@ function LandingPage() {
   const navigator = useNavigate()
   const goToCart = () => navigator("/mycart")
 
-  const addPizzaCartHandler = (pizza) => dispatch(addToCart(pizza))
-  const addIngredientCartHandler = (ingredient) => dispatch(addToCart(ingredient))
+  const addPizzaCartHandler = (pizza) => dispatch(addPizzaToCart(pizza))
+  const addIngredientCartHandler = (ingredient) => dispatch(addIngredientToCart(ingredient))
 
   useEffect(() => {
 
@@ -48,10 +48,11 @@ function LandingPage() {
 
   useEffect(() => {
     setInCard(() => {
-      cart.length > 0 ? setShowBasket(true) : setShowBasket(false)
-      return cart.length
+      const total = cart.pizzas.length + cart.ingredients.length
+      total > 0 ? setShowBasket(true) : setShowBasket(false)
+      return total
     })
-  }, [cart.length])
+  }, [cart.pizzas.length + cart.ingredients.length])
 
   return (
     <div style={{ position: "relative" }}>
@@ -106,7 +107,7 @@ function LandingPage() {
 
       {/* Ingredients */}
       <section id="ingredients_container">
-      <span className='banner'>Add-ons</span>
+        <span className='banner'>Add-ons</span>
         {ingredientsState && Object.values(ingredientsState).map(ingredient => (
           <div className='ingredient_card' key={ingredient.id}>
             <div className="img_container">
