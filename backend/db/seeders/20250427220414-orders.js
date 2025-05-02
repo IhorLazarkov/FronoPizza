@@ -30,6 +30,7 @@ module.exports = {
       order_id: order.id,
       pizza_id: pizza.id,
       quantity: 1,
+      status: 'ready'
     });
     await OrderItem.create({
       order_id: order.id,
