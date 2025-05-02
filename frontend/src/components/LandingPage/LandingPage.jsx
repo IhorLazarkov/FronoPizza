@@ -48,10 +48,10 @@ function LandingPage() {
 
   useEffect(() => {
     setInCard(() => {
-      cart.length > 0 ? setShowBasket(true) : setShowBasket(false)
-      return cart.length
+      cart.pizzas.length > 0 ? setShowBasket(true) : setShowBasket(false)
+      return cart.pizzas.length + cart.ingredients.length
     })
-  }, [cart.length])
+  }, [cart.pizzas.length || cart.ingredients.length])
 
   return (
     <div style={{ position: "relative" }}>

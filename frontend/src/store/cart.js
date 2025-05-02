@@ -1,11 +1,11 @@
 import { csrfFetch } from "./csrf"
 
 export const addToCart = (pizza) => ({
-    type: "ADD_TO_CART",
+    type: "ADD_PIZZA_TO_CART",
     payload: pizza
 })
 export const removeFromCart = (pizza) => ({
-    type: "REMOVE_FROM_CART",
+    type: "REMOVE_PIZZA_FROM_CART",
     payload: pizza
 })
 export const clearCart = () => ({
@@ -59,17 +59,26 @@ export const createOrder = (order) => async (dispatch) => {
     return response;
 }
 
-export default function cartReducer(state = [], action) {
+const initialState = {
+    pizzas: [],
+    ingredients: []
+}
+
+export default function cartReducer(state = initialState, action) {
     switch (action.type) {
-        case "ADD_TO_CART":
-            const newCart = [...state]
-            const pizza = action.payload
-            newCart.push({ id: newCart.length + 1, pizza })
-            return [...newCart]
-        case "REMOVE_FROM_CART":
-            return { ...state, [action.payload.id]: undefined }
+        case "ADD_PIZZA_TO_CART":
+            const pizzas = [...state.pizzas]
+            const newPizza = action.payload
+            pizzas.push({ id: pizzas.length + 1, pizza: newPizza })
+            const newState = { ...state, pizzas }
+            return newState
+        case "REMOVE_PIZZA_FROM_CART":
+            const pizzasBeforeRemove = [...state.pizzas]
+            const {id} = action.payload
+            const newStateRemove = pizzasBeforeRemove.filter(pizza => pizza.id !== id)
+            return { ...state, pizzas: newStateRemove }
         case "CLEAR_CART":
-            return []
+            return initialState
         // Get all
         case "GET_CART":
         default:
