@@ -25,7 +25,7 @@ router.post('/', async (req, res, next) => {
     for (const ingredient of ingredients) {
         if (!aggregateIngredients[ingredient.id]) {
             aggregateIngredients[ingredient.id] = {
-                quantity: 1
+                quantity: ingredient.quantity
             }
         } else {
             aggregateIngredients[ingredient.id].quantity += 1

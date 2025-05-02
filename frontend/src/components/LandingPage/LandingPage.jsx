@@ -60,12 +60,14 @@ function LandingPage() {
         className={`basket ${showBasket ? "basket-show" : ""}`}
         onClick={goToCart} >
 
-        <IoCloseCircle style={{ fontSize: "1.3rem" }} onClick={(e) => {
-          e.stopPropagation()
-          dispatch(clearCart())
-        }} />
+        <IoCloseCircle
+          style={{ fontSize: "1.3rem" }}
+          onClick={(e) => {
+            e.stopPropagation()
+            dispatch(clearCart())
+          }} />
         <CiShoppingBasket />
-        {inCard}
+        <span>{inCard}</span>
       </div>
       <span style={{ position: "absolute" }}>Landing Page</span>
 
