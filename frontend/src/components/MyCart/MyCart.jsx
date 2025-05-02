@@ -44,8 +44,13 @@ export function MyCart() {
                     <div>Name: {item.pizza.name}</div>
                     <div>Cost: {item.pizza.price}</div>
                 </div>
-            ))
-            }
+            ))}
+            {cartItems.ingredients.map((item) => (
+                <div key={item.id}>
+                    <div>Name: {item.ingredient.name}</div>
+                    <div>Cost: {item.ingredient.price}</div>
+                </div>
+            ))}
             <div>
                 Total: {totalPrice}
             </div>
