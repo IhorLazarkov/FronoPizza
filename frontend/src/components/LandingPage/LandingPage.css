@@ -10,7 +10,7 @@
 }
 
 #pizzas_container {
-  & .banner{
+  & .banner {
     position: absolute;
     background-color: var(--sub-secondary-v1);
     font-family: var(--description-font);
@@ -25,7 +25,7 @@
 #ingredients_container {
   grid-template-columns: repeat(auto-fill, clamp(200px, 300px, 15%));
 
-  & .banner{
+  & .banner {
     position: absolute;
     background-color: var(--sub-secondary-v1);
     font-family: var(--description-font);
@@ -113,15 +113,15 @@
     transform: scale(1.5);
   }
 }
-.ingredient_card{
+.ingredient_card {
   cursor: inherit;
   width: fit-content;
-  
-  & .img_container{
+
+  & .img_container {
     height: clamp(9rem, 9rem, 9rem);
   }
 
-  & img{
+  & img {
     width: 100%;
     object-fit: cover;
   }
@@ -140,10 +140,10 @@
     position: relative;
     font-size: 2rem;
     font-style: italic;
-    color: var(--sub-secondary-v1)
+    color: var(--sub-secondary-v1);
   }
-  
-  & span::after{
+
+  & span::after {
     content: "";
     position: absolute;
     width: 100%;
@@ -160,5 +160,3 @@
 .basket-show {
   transform: translateY(0);
 }
-
-
