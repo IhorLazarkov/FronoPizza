@@ -63,7 +63,7 @@ module.exports = {
       name: 'Pizza Hawaiian',
       price: 12,
       image: 'https://www.seriouseats.com/thmb/A9suq99VfX-1k6enkWlkC_4ypWI=/750x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__serious_eats__slice.seriouseats.com__images__2012__12__20121211-pepperoni-curl-pizza-lab-01-6109e17ffa4a487b855011d9f0f1a55d.jpg',
-      description: 'A classic Italian pizza with tomato sauce, mozzarella cheese, and pepperoni.'
+      description: 'Hawaiian Pizza is a sweet and savory delight, combining juicy pineapple and smoky ham over a golden layer of melted mozzarella atop tangy tomato sauce. Baked on a crisp, chewy crust, each slice delivers a tropical burst of flavor that’s both bold and irresistibly satisfying.'
     });
     await Ingredient.create({
       name: 'Ham',
@@ -83,7 +83,7 @@ module.exports = {
       name: 'Pizza Veggie',
       price: 12,
       image: 'https://www.allrecipes.com/thmb/YK6SsTW9wieSVaFP9bwNzhhXgcM=/0x512/filters:no_upscale():max_bytes(150000):strip_icc()/AR-15022-veggie-pizza-DDMFS-4x3-hero-3dabf0783ef544eeaa23bdf28b48b178.jpg',
-      description: 'A classic Italian pizza with tomato sauce, mozzarella cheese, and pepperoni.'
+      description: 'Veggie Pizza is a garden-fresh medley of colorful bell peppers, earthy mushrooms, sweet red onions, and ripe tomatoes layered over rich tomato sauce and melted mozzarella. Baked to perfection on a crispy crust, each bite bursts with vibrant, wholesome flavor and satisfying crunch.'
     });
     await Ingredient.create({
       name: 'Mushroom',
