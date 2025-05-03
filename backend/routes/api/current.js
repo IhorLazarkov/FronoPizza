@@ -1,13 +1,13 @@
 const router = require('express').Router();
-const { 
-    User, 
-    Review, 
-    Favorite, 
-    Pizza, 
+const {
+    User,
+    Review,
+    Favorite,
+    Pizza,
     Ingredient,
-    Order, 
-    OrderItem, 
- } = require('../../db/models');
+    Order,
+    OrderItem,
+} = require('../../db/models');
 
 router.get('/reviews', async (req, res) => {
     const reviews = await Review.findAll({
@@ -30,15 +30,18 @@ router.get('/favorites', async (req, res) => {
             attributes: []
         }, {
             model: Pizza,
-            attributes: ['id', 'name', 'description', 'price', 'image']
+            attributes: ['id']
         }]
     });
-    res.json(favorites);
+    const result = favorites.map(({ Pizza }) => {
+        return { id: Pizza.id }
+    });
+    res.json(result);
 });
 
 router.get('/orders', async (req, res, next) => {
     const { user } = req;
-    if(!user){
+    if (!user) {
         return res.status(403).json({
             message: 'Get orders not avaiilable for guests'
         })

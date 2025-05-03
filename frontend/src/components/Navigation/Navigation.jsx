@@ -49,9 +49,10 @@ export default function Navigation({ onLogout }) {
         <>
             <nav>
                 <ul>
-                    <li><NavLink>My faivorites</NavLink></li>
+                    <li><NavLink to="/">Home</NavLink></li>
                     <li><NavLink>My orders</NavLink></li>
                     <li><Basket /></li>
+                    <li><NavLink to="/myfavorites">My faivorites</NavLink></li>
                     <li><NavLink>My reviews</NavLink></li>
                     <li>
                         <button className='critical' onClick={onLogout}>Logout</button>
