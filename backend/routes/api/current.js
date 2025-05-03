@@ -10,10 +10,13 @@ const {
 } = require('../../db/models');
 
 router.get('/reviews', async (req, res) => {
+    const { user } = req;
     const reviews = await Review.findAll({
+        where: {
+            user_id: user.id
+        },
         include: [{
-            model: User,
-            attributes: ['firstName', 'lastName']
+            model: Pizza
         }]
     });
     res.json(reviews);

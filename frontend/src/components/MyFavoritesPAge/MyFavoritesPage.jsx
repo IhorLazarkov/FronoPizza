@@ -1,6 +1,6 @@
 import "./MyFavorites.css"
 import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { fetchPizzas } from "../../store/pizzas"
 import { getFavorites } from "../../store/favorites"
 

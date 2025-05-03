@@ -5,6 +5,7 @@ import pizzasReducer from "./pizzas";
 import cartReducer from "./cart";
 import ingredientsReducer from "./ingredients";
 import favoritesReducer from "./favorites";
+import reviewsReducer from "./reviews";
 
 let enhancer;
 if (import.meta.env.MODE === "production") {
@@ -21,6 +22,7 @@ const reducers = combineReducers({
     pizzas: pizzasReducer,
     ingredients: ingredientsReducer,
     favorites: favoritesReducer,
+    reviews: reviewsReducer,
     cart: cartReducer,
 });
 
