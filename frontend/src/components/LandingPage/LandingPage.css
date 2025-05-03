@@ -43,6 +43,7 @@
 
 .pizza_card,
 .ingredient_card {
+  color: inherit;
   --padding: 0 20px;
   text-decoration: none;
   cursor: pointer;

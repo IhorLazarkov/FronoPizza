@@ -10,6 +10,7 @@ import { fetchPizzas } from '../../store/pizzas';
 import { addIngredientToCart, addPizzaToCart } from '../../store/cart';
 import { getIngredients } from '../../store/ingredients';
 import { getFavorites, addFavorite, removeFavorite } from '../../store/favorites';
+import { NavLink } from 'react-router-dom';
 
 function LandingPage() {
 
@@ -76,7 +77,11 @@ function LandingPage() {
       <section id='pizzas_container'>
         <span className='banner'>Pizzas</span>
         {pizzasState && Object.values(pizzasState).map(pizza => (
-          <div className="pizza_card" key={pizza.id}>
+          <NavLink
+            to={`/pizza/${pizza.id}`}
+            className="pizza_card"
+            key={pizza.id}>
+              
             <h2>{pizza.name}</h2>
             <div className="img_container">
               <img src={pizza.image} alt={pizza.name} />
@@ -108,7 +113,7 @@ function LandingPage() {
             <button
               className='primary'
               onClick={() => addPizzaCartHandler(pizza)}>Add</button>
-          </div>
+          </NavLink>
         ))}
       </section>
 

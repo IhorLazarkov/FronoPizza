@@ -57,7 +57,7 @@ router.get("/:id", async (req, res, next) => {
     const pizza = await Pizza.findByPk(id, {
       include: [{
         model: Ingredient,
-        attributes: ['id', 'name'],
+        attributes: ['id', 'name', 'image'],
       },
       {
         model: Review,

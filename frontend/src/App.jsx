@@ -6,6 +6,7 @@ import OrderLivePage from './components/OrderLive/OrderLivePage'
 import LoginPage from './components/LoginPage'
 import MyFavoritesPage from './components/MyFavoritesPage'
 import MyReviewPage from './components/MyReviews/MyReviewPage'
+import PizzaDetailsPage from './components/PizzaDetailsPage/PizzaDetailsPage'
 
 const router = createBrowserRouter(
   [
@@ -31,6 +32,10 @@ const router = createBrowserRouter(
         {
           path: "orderlive/:id",
           element: <OrderLivePage />,
+        },
+        {
+          path: "pizza/:id",
+          element: <PizzaDetailsPage />,
         }
       ]
     }
