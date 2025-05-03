@@ -4,6 +4,7 @@ import LandingPage from './components/LandingPage'
 import { MyCart } from './components/MyCart/MyCart'
 import OrderLivePage from './components/OrderLive/OrderLivePage'
 import LoginPage from './components/LoginPage'
+import MyFavoritesPage from './components/MyFavoritesPAge/MyFavoritesPage'
 
 const router = createBrowserRouter(
   [
@@ -13,6 +14,10 @@ const router = createBrowserRouter(
         {
           path: "/",
           element: <LandingPage />,
+        },
+        {
+          path: "myfavorites",
+          element: <MyFavoritesPage />,
         },
         {
           path: "mycart",
