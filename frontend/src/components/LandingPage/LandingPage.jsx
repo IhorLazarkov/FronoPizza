@@ -2,26 +2,50 @@ import './LandingPage.css';
 
 import { MdOutlineMessage } from "react-icons/md";
 import { AiOutlineLike } from "react-icons/ai";
+import { MdFavoriteBorder } from "react-icons/md";
 
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPizzas } from '../../store/pizzas';
-import { addIngredientToCart, addPizzaToCart, clearCart } from '../../store/cart';
+import { addIngredientToCart, addPizzaToCart } from '../../store/cart';
 import { getIngredients } from '../../store/ingredients';
+import { getFavorites, addFavorite, removeFavorite } from '../../store/favorites';
 
 function LandingPage() {
 
   const dispatch = useDispatch();
   const pizzas = useSelector(state => state.pizzas);
   const ingredients = useSelector(state => state.ingredients);
+  const favorites = useSelector(state => state.favorites);
 
   const [pizzasState, setPizzas] = useState(pizzas || {});
   const [ingredientsState, setIngredients] = useState(ingredients || {});
+  const [favoritesState, setFavorites] = useState(favorites || []);
 
   const [error, setError] = useState({ message: "", errors: [] });
 
   const addPizzaCartHandler = (pizza) => dispatch(addPizzaToCart(pizza))
   const addIngredientCartHandler = (ingredient) => dispatch(addIngredientToCart(ingredient))
+
+  const isFavorite = (id) => favoritesState.filter(f => f.id === id).length > 0;
+  const addFavoriteHandler = (id) => {
+    dispatch(addFavorite(id))
+      .then(() => {
+        dispatch(getFavorites()).then(res => {
+          setFavorites(res)
+        })
+      })
+      .catch(error => console.error({ error }))
+  }
+  const removeFavoriteHandler = (id) => {
+    dispatch(removeFavorite(id))
+      .then(() => {
+        dispatch(getFavorites()).then(res => {
+          setFavorites(res)
+        })
+      })
+      .catch(error => console.error({ error }))
+  }
 
   useEffect(() => {
 
@@ -33,6 +57,11 @@ function LandingPage() {
     // Get Ingredients
     dispatch(getIngredients())
       .then(response => setIngredients(response))
+      .catch(error => setError({ ...error.message }))
+
+    // Get Favorites
+    dispatch(getFavorites())
+      .then(res => setFavorites(res))
       .catch(error => setError({ ...error.message }))
 
   }, [dispatch]);
@@ -62,6 +91,10 @@ function LandingPage() {
             </ul>
             {/* Reviews & Price */}
             <div className='pizza_card_footer'>
+              {/* Favorites */}
+              {favoritesState && isFavorite(pizza.id)
+                ? <MdFavoriteBorder style={{ color: "red" }} onClick={() => removeFavoriteHandler(pizza.id)} />
+                : <MdFavoriteBorder onClick={() => addFavoriteHandler(pizza.id)} />}
               {/* Price */}
               <div>Cost: ${pizza.price}</div>
               {/* Reviews */}

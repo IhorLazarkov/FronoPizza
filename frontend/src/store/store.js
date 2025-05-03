@@ -4,6 +4,7 @@ import sessionReducer from "./session";
 import pizzasReducer from "./pizzas";
 import cartReducer from "./cart";
 import ingredientsReducer from "./ingredients";
+import favoritesReducer from "./favorites";
 
 let enhancer;
 if (import.meta.env.MODE === "production") {
@@ -19,7 +20,8 @@ const reducers = combineReducers({
     user: sessionReducer,
     pizzas: pizzasReducer,
     ingredients: ingredientsReducer,
-    cart: cartReducer
+    favorites: favoritesReducer,
+    cart: cartReducer,
 });
 
 const configureStore = (preloadedState) => {
