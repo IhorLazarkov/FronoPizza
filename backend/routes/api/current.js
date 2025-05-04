@@ -60,12 +60,10 @@ router.get('/orders', async (req, res, next) => {
                     attributes: ['quantity'],
                     include: [
                         {
-                            model: Pizza,
-                            attributes: ['name', 'price'],
+                            model: Pizza
                         },
                         {
-                            model: Ingredient,
-                            attributes: ['name', 'price'],
+                            model: Ingredient
                         }
                     ]
                 },

@@ -23,14 +23,13 @@ module.exports = {
     const ingredient = await Ingredient.findOne();
     const order = await Order.create({
       user_id: user.id,
-      totalPrice: 100,
-      // status: use default value
+      totalPrice: 12,
+      status: 'ready'
     });
     await OrderItem.create({
       order_id: order.id,
       pizza_id: pizza.id,
       quantity: 1,
-      status: 'ready'
     });
     await OrderItem.create({
       order_id: order.id,

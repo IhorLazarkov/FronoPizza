@@ -1,12 +1,13 @@
 import './App.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import LandingPage from './components/LandingPage'
-import { MyCart } from './components/MyCart/MyCart'
-import OrderLivePage from './components/OrderLive/OrderLivePage'
+import MyCart from './components/MyCart'
+import OrderLivePage from './components/OrderLive'
 import LoginPage from './components/LoginPage'
 import MyFavoritesPage from './components/MyFavoritesPage'
-import MyReviewPage from './components/MyReviews/MyReviewPage'
-import PizzaDetailsPage from './components/PizzaDetailsPage/PizzaDetailsPage'
+import MyReviewPage from './components/MyReviews'
+import PizzaDetailsPage from './components/PizzaDetailsPage'
+import MyOrdersPage from './components/MyOrdersPage'
 
 const router = createBrowserRouter(
   [
@@ -16,6 +17,10 @@ const router = createBrowserRouter(
         {
           path: "/",
           element: <LandingPage />,
+        },
+        {
+          path: "myorders",
+          element: <MyOrdersPage/>,
         },
         {
           path: "myfavorites",

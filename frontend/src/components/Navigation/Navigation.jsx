@@ -51,7 +51,7 @@ export default function Navigation({ onLogout }) {
             <nav>
                 <ul>
                     <li><NavLink to="/">Home</NavLink></li>
-                    <li><NavLink>My orders</NavLink></li>
+                    <li><NavLink to="/myorders">My orders</NavLink></li>
                     <li><Basket /></li>
                     <li><NavLink to="/myfavorites">My faivorites</NavLink></li>
                     <li><NavLink to="/myreviews">My reviews</NavLink></li>

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { createOrder, getCart } from "../../store/cart"
 import { useNavigate } from 'react-router-dom';
 
-export function MyCart() {
+export default function MyCart() {
     const dispatch = useDispatch()
     const cart = useSelector(state => state.cart)
     const [cartItems, setCartItems] = useState(cart || {pizzas: [], ingredients: []})
