@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import './MyOrders.css'
 import { getOrders } from '../../store/orders'
 import { useDispatch, useSelector } from 'react-redux'
+import { addPizzaToCart, addIngredientToCart } from '../../store/cart'
 export default function MyOrdersPage() {
 
     const dispatch = useDispatch()
@@ -17,6 +18,14 @@ export default function MyOrdersPage() {
         const month = dateObj.getMonth()
         const year = dateObj.getFullYear()
         return `${arrMonths[month]} ${year}`
+    }
+
+    const onOrderAgain = (order) => {
+        console.log('order', order)
+        order.OrderItems.map(orderItem => {
+            orderItem.Pizza && dispatch(addPizzaToCart(orderItem.Pizza))
+            orderItem.Ingredient && dispatch(addIngredientToCart(orderItem.Ingredient))
+        })
     }
 
     useEffect(() => {
@@ -67,7 +76,11 @@ export default function MyOrdersPage() {
                     <div className="order_footer">
                         <span>Total:</span><span>${order.totalPrice}</span>
                     </div>
-                    <button className="primary" style={{ width: "100%" }}>Order again</button>
+                    <button 
+                    className="primary" 
+                    style={{ width: "100%" }}
+                    onClick={() => onOrderAgain(order)}
+                    >Order again</button>
                 </div>
             ))}
         </div>
