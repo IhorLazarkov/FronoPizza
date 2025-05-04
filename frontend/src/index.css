@@ -16,13 +16,15 @@
   --sub-secondary-v1: #fdf7f2;
   --third-v1: #333333;
 
-  background-color: var(--sub-secondary-v1);
 }
 body {
   margin: 0.2rem;
   padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+  background-color: var(--sub-secondary-v1);
+  color: var(--third-v1);
 }
 button{
   cursor: pointer;

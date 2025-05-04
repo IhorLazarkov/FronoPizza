@@ -10,6 +10,7 @@ import { fetchPizzas } from '../../store/pizzas';
 import { addIngredientToCart, addPizzaToCart } from '../../store/cart';
 import { getIngredients } from '../../store/ingredients';
 import { getFavorites, addFavorite, removeFavorite } from '../../store/favorites';
+import { NavLink } from 'react-router-dom';
 
 function LandingPage() {
 
@@ -76,7 +77,10 @@ function LandingPage() {
       <section id='pizzas_container'>
         <span className='banner'>Pizzas</span>
         {pizzasState && Object.values(pizzasState).map(pizza => (
-          <div className="pizza_card" key={pizza.id}>
+          <NavLink
+            to={`/pizza/${pizza.id}`}
+            className="pizza_card"
+            key={pizza.id}>
             <h2>{pizza.name}</h2>
             <div className="img_container">
               <img src={pizza.image} alt={pizza.name} />
@@ -93,8 +97,20 @@ function LandingPage() {
             <div className='pizza_card_footer'>
               {/* Favorites */}
               {favoritesState && isFavorite(pizza.id)
-                ? <MdFavoriteBorder style={{ color: "red" }} onClick={() => removeFavoriteHandler(pizza.id)} />
-                : <MdFavoriteBorder onClick={() => addFavoriteHandler(pizza.id)} />}
+                ? <MdFavoriteBorder
+                  style={{ color: "red" }}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    removeFavoriteHandler(pizza.id);
+                  }}
+                />
+                : <MdFavoriteBorder
+                  onClick={(e) => {
+                    e.preventDefault();
+                    addFavoriteHandler(pizza.id);
+                  }}
+                />
+              }
               {/* Price */}
               <div>Cost: ${pizza.price}</div>
               {/* Reviews */}
@@ -107,8 +123,11 @@ function LandingPage() {
             </div>
             <button
               className='primary'
-              onClick={() => addPizzaCartHandler(pizza)}>Add</button>
-          </div>
+              onClick={(e) => {
+                e.preventDefault();
+                addPizzaCartHandler(pizza);
+              }}>Add</button>
+          </NavLink>
         ))}
       </section>
 

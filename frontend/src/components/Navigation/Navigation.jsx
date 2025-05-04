@@ -36,7 +36,8 @@ function Basket() {
                 onClick={(e) => {
                     e.stopPropagation()
                     dispatch(clearCart())
-                }} />
+                }}
+            />
             <CiShoppingBasket />
             <span>{inCard}</span>
         </div>
@@ -53,7 +54,7 @@ export default function Navigation({ onLogout }) {
                     <li><NavLink>My orders</NavLink></li>
                     <li><Basket /></li>
                     <li><NavLink to="/myfavorites">My faivorites</NavLink></li>
-                    <li><NavLink>My reviews</NavLink></li>
+                    <li><NavLink to="/myreviews">My reviews</NavLink></li>
                     <li>
                         <button className='critical' onClick={onLogout}>Logout</button>
                     </li>

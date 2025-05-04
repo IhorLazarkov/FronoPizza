@@ -24,17 +24,17 @@ module.exports = {
       {
         name: 'Tomato',
         price: 2,
-        image: 'https://example.com/tomato.jpg'
+        image: 'https://www.pantrymama.com/wp-content/uploads/2024/01/BEST-HOMEMADE-PIZZA-SAUCE-RECIPE-FOR-SOURDOUGH-PIZZA-1.jpg'
       },
       {
         name: 'Mozzarella',
         price: 3,
-        image: 'https://example.com/mozzarella.jpg'
+        image: 'https://www.tastingtable.com/img/gallery/homemade-margherita-pizza-recipe/gather-the-ingredients-for-homemade-margherita-pizza-1675779357.webp'
       },
       {
         name: 'Basil',
         price: 1,
-        image: 'https://example.com/basil.jpg'
+        image: 'https://www.withspice.com/wp-content/uploads/2022/10/ingredients_basil-pesto-pizza.jpg'
       }
     ]);
     await margherita.addIngredient(ingredients);

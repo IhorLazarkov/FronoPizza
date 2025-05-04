@@ -1,6 +1,6 @@
 import "./MyFavorites.css"
 import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { fetchPizzas } from "../../store/pizzas"
 import { getFavorites } from "../../store/favorites"
 
@@ -12,7 +12,6 @@ export default function MyFavoritesPage() {
     useEffect(() => {
         dispatch(fetchPizzas()).then((pizzas) => {
             dispatch(getFavorites()).then((favorites) => {
-                console.log({ pizzas, favorites });
                 const favPizzas = pizzas.filter(p => {
                     return favorites.filter(f => f.id === p.id).length > 0
                 })
