@@ -97,8 +97,20 @@ function LandingPage() {
             <div className='pizza_card_footer'>
               {/* Favorites */}
               {favoritesState && isFavorite(pizza.id)
-                ? <MdFavoriteBorder style={{ color: "red" }} onClick={() => removeFavoriteHandler(pizza.id)} />
-                : <MdFavoriteBorder onClick={() => addFavoriteHandler(pizza.id)} />}
+                ? <MdFavoriteBorder
+                  style={{ color: "red" }}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    removeFavoriteHandler(pizza.id);
+                  }}
+                />
+                : <MdFavoriteBorder
+                  onClick={(e) => {
+                    e.preventDefault();
+                    addFavoriteHandler(pizza.id);
+                  }}
+                />
+              }
               {/* Price */}
               <div>Cost: ${pizza.price}</div>
               {/* Reviews */}

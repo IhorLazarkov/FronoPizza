@@ -34,14 +34,18 @@ function ReviewForm({ pizza_id }) {
             display: "flex",
             flexDirection: "column",
             gap: "10px",
-            alignItems: "center"
+            alignItems: "center",
         }}>
             <h3>Add Review</h3>
-            <input type="number" min="1" max="5" value={rating} onChange={e => setRating(e.target.value)} />
             <textarea value={reviewMessage} onChange={e => setReviewMessage(e.target.value)}></textarea>
+            <input
+                value={rating}
+                type="number" min="1" max="5"
+                onChange={e => setRating(e.target.value)}
+            />
             <div style={{ display: "flex", gap: "10px" }}>
-                <button className="primary" onClick={onAddReview}>Create</button>
                 <button className="critical" onClick={closeModal}>Cancel</button>
+                <button className="primary" onClick={onAddReview}>Create</button>
             </div>
         </div>
     )

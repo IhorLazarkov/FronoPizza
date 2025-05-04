@@ -39,12 +39,17 @@ router.post('/', async (req, res, next) => {
 router.put('/:id', async (req, res, next) => {
     try {
         const { id } = req.params;
-        const { body } = req.body;
+        const body = req.body;
         const review = await Review.findByPk(id);
         await review.update(body);
         await review.save();
 
-        res.status(200).json(review);
+        const response = await Review.findOne({
+            where: { id },
+            include: { model: Pizza }
+        })
+
+        res.status(200).json(response);
     } catch (error) {
         next(error);
     }

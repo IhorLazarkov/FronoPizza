@@ -10,7 +10,7 @@ export const addReview = (review) => async (dispatch) => {
         method: 'POST',
         body: JSON.stringify(review)
     }).catch(async error => {
-        console.log({error});
+        console.log({ error });
         const err = new Error('Fail to add review.');
         err.message = await error.json();
         throw err;
@@ -86,9 +86,8 @@ const reviewsReducer = (state = [], action) => {
             state.forEach(r => {
                 if (r.id === action.payload.id) {
                     newStateOnUpdate.push(action.payload);
-                    return;
-                }
-                newStateOnUpdate.push(r);
+                } else
+                    newStateOnUpdate.push(r);
             })
             return [...newStateOnUpdate]
         case DELETE_REVIEW:

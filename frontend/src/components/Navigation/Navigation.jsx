@@ -36,7 +36,8 @@ function Basket() {
                 onClick={(e) => {
                     e.stopPropagation()
                     dispatch(clearCart())
-                }} />
+                }}
+            />
             <CiShoppingBasket />
             <span>{inCard}</span>
         </div>
