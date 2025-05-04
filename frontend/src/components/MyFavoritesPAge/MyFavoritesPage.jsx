@@ -12,7 +12,6 @@ export default function MyFavoritesPage() {
     useEffect(() => {
         dispatch(fetchPizzas()).then((pizzas) => {
             dispatch(getFavorites()).then((favorites) => {
-                console.log({ pizzas, favorites });
                 const favPizzas = pizzas.filter(p => {
                     return favorites.filter(f => f.id === p.id).length > 0
                 })

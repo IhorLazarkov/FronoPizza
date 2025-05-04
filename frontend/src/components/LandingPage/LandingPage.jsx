@@ -81,7 +81,6 @@ function LandingPage() {
             to={`/pizza/${pizza.id}`}
             className="pizza_card"
             key={pizza.id}>
-              
             <h2>{pizza.name}</h2>
             <div className="img_container">
               <img src={pizza.image} alt={pizza.name} />
@@ -112,7 +111,10 @@ function LandingPage() {
             </div>
             <button
               className='primary'
-              onClick={() => addPizzaCartHandler(pizza)}>Add</button>
+              onClick={(e) => {
+                e.preventDefault();
+                addPizzaCartHandler(pizza);
+              }}>Add</button>
           </NavLink>
         ))}
       </section>

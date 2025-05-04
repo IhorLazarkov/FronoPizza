@@ -6,11 +6,53 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getPizzaDetails } from "../../store/pizzaDetails";
 
+import ModalButton from "../ModalButton";
+import { useModal } from "../../context/Modal";
+import { addReview } from "../../store/reviews";
+
+function ReviewForm({ pizza_id }) {
+    const { closeModal } = useModal()
+    const dispatch = useDispatch();
+    const user = useSelector(state => state.user)
+    const [reviewMessage, setReviewMessage] = useState("");
+    const [rating, setRating] = useState(1);
+
+    const onAddReview = () => {
+        const review = {
+            pizza_id,
+            user_id: user.id,
+            rating,
+            review: reviewMessage
+        }
+        dispatch(addReview(review))
+            .then(() => closeModal())
+            .catch(err => console.log(err))
+    }
+
+    return (
+        <div style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "10px",
+            alignItems: "center"
+        }}>
+            <h3>Add Review</h3>
+            <input type="number" min="1" max="5" value={rating} onChange={e => setRating(e.target.value)} />
+            <textarea value={reviewMessage} onChange={e => setReviewMessage(e.target.value)}></textarea>
+            <div style={{ display: "flex", gap: "10px" }}>
+                <button className="primary" onClick={onAddReview}>Create</button>
+                <button className="critical" onClick={closeModal}>Cancel</button>
+            </div>
+        </div>
+    )
+}
+
 export default function PizzaDetailsPage() {
     const { id } = useParams();
     const dispatch = useDispatch();
     const user = useSelector(state => state.user);
     const pizza = useSelector(state => state.pizzaDetails);
+    const reviews = useSelector(state => state.reviews);
     const [pizzaState, setPizzaState] = useState(pizza);
     const isReviewOwner = useRef(false);
     const numReviews = useRef(0);
@@ -34,7 +76,7 @@ export default function PizzaDetailsPage() {
                 setPizzaState(pizzaDetails)
             })
             .catch(error => console.error({ error }));
-    }, [dispatch]);
+    }, [dispatch, reviews]);
 
     return (
         <div className="pizza_details_page">
@@ -60,9 +102,11 @@ export default function PizzaDetailsPage() {
                 {numReviews.current == 0
                     ? <h3>There are no reviews yet</h3>
                     : <h3>Reveiws: {numReviews.current}</h3>}
-                {!isReviewOwner.current && <button
-                    style={{ width: "max-content", padding: "10px", fontSize: "1rem" }}
-                    className="primary">Add Review</button>}
+                {!isReviewOwner.current && <ModalButton
+                    className="primary"
+                    buttonText="Add Review"
+                    modalComponent={<ReviewForm pizza_id={pizzaState.id} />}
+                />}
                 {pizzaState.Reviews.map(r => (
                     <div key={r.id} className="review">
                         <span>{printDate(r.updatedAt)}</span>

@@ -32,7 +32,12 @@ export default function MyReviewPage() {
     return (
         <div>
             {reviewsState.length > 0
-                ? <div className='reviews_container'>
+                ? <div className='reviews_container'
+                    style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "10px"
+                    }}>
                     {reviewsState.map(review => (
                         <div
                             className='review_card_container'

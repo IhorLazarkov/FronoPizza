@@ -6,7 +6,7 @@ import './Modal.css'
 
 const ModalContext = createContext();
 
-export const useModal = () => { return useContext(ModalContext) }
+export const useModal = () => useContext(ModalContext)
 
 export function ModalProvider({ children }) {
     const modalRef = useRef();
