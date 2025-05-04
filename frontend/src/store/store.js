@@ -7,6 +7,7 @@ import ingredientsReducer from "./ingredients";
 import favoritesReducer from "./favorites";
 import reviewsReducer from "./reviews";
 import pizzaDetailsReducer from "./pizzaDetails";
+import ordersReducer from "./orders";
 
 let enhancer;
 if (import.meta.env.MODE === "production") {
@@ -26,9 +27,11 @@ const reducers = combineReducers({
     favorites: favoritesReducer,
     reviews: reviewsReducer,
     cart: cartReducer,
+    orders: ordersReducer,
 });
 
 const configureStore = (preloadedState) => {
     return createStore(reducers, preloadedState, enhancer);
 }
+
 export default configureStore;
