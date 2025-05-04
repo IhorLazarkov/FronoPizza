@@ -32,9 +32,9 @@ export default function MyOrdersPage() {
 
                     {/* Order main info */}
                     <div className="order_header">
-                        <span>Order ID:</span><span>{order.id}</span>
-                        <span>Date: </span><span>{printDate(order.updatedAt)}</span>
-                        <span>Status:</span><span>{order.status}</span>
+                        <span>Order ID: {order.id}</span>
+                        <span>Date: {printDate(order.updatedAt)}</span>
+                        <span>Status: {order.status}</span>
                     </div>
 
                     {/* Order Items */}
@@ -46,7 +46,8 @@ export default function MyOrdersPage() {
                                     <>
                                         <span><img src={item.Pizza.image} /></span>
                                         <span className='sub-item'>{item.Pizza.name}</span>
-                                        <span className='sub-item'>{item.quantity}</span>
+                                        <span className='sub-item'>${item.Pizza.price}</span>
+                                        <span className='sub-item'>Quantity: {item.quantity}</span>
                                     </>
                                 }
                                 {/* Ingredients */}
@@ -54,7 +55,8 @@ export default function MyOrdersPage() {
                                     <>
                                         <span><img src={item.Ingredient.image} /></span>
                                         <span className='sub-item'>{item.Ingredient.name}</span>
-                                        <span className='sub-item'>{item.quantity}</span>
+                                        <span className='sub-item'>${item.Ingredient.price}</span>
+                                        <span className='sub-item'>Quantity: {item.quantity}</span>
                                     </>
                                 }
                             </div>

@@ -18,7 +18,7 @@
   & .order_header,
   & .order_footer {
     display: grid;
-    grid-template-columns: repeat(2, minmax(100px, 45%));
+    grid-template-columns: repeat(auto-fit, minmax(100px, 45%));
     grid-template-rows: minmax(1rem, 5%);
     grid-row-gap: 0.5rem;
     font-family: var(--header-font);
@@ -41,6 +41,8 @@
     }
     & .sub-item{
         padding: calc(100% / 10);
+        font-size: 1rem;
+        font-weight: 600;
     }
   }
 
