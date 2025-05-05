@@ -103,6 +103,7 @@ function SignupForm({ setShowLoginForm, setShowSignupForm }) {
   return (
     <div className="signup-form">
       <form onSubmit={onSubmitSignup}>
+        <img src="../../assets/logo.png" alt="logo" />
         <input type="text" placeholder="first name" value={firstName} onChange={e => setFirstName(e.target.value)} />
         <input type="password" placeholder="last name" value={lastName} onChange={e => setLastName(e.target.value)} />
         <input type="text" placeholder="email" value={email} onChange={e => setEmail(e.target.value)} />

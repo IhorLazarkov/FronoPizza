@@ -2,7 +2,7 @@
   width: 100vw;
   height: 100vh;
   background-color: inherit;
-  background-image: url("/assets/bg-img-login-page.jpg");
+  background-image: url("/assets/bg-img-login-page.jpg.avif");
   background-size: cover;
   position: absolute;
   top: 0;
@@ -31,8 +31,15 @@
     flex-direction: column;
     gap: 10px;
 
-    & input, button {
-        height: 2rem;
+    & input,
+    button {
+      height: 2rem;
     }
+  }
+}
+
+.signup-form {
+  & form {
+    height: 90%;
   }
 }
