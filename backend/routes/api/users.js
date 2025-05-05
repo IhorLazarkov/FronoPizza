@@ -1,7 +1,7 @@
 const { User } = require('../../db/models');
-const { serTokenCookie } = require('../../utils/auth.js');
+const { setTokenCookie } = require('../../utils/auth.js');
 const router = require('express').Router();
-
+const bcrypt = require('bcryptjs');
 
 /**
  * @description Signup a User
@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
     const hashedPassword = bcrypt.hashSync(password);
     const user = await User.create({ email, hashedPassword, firstName, lastName });
 
-    await serTokenCookie(res, user);
+    setTokenCookie(res, user);
     return res.status(201).json({
         id: user.id,
         email: user.email,

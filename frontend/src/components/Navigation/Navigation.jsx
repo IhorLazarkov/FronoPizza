@@ -7,7 +7,7 @@ import { clearCart } from "../../store/cart"
 import { NavLink, Outlet } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 
 function Basket() {
 
@@ -46,10 +46,18 @@ function Basket() {
 
 export default function Navigation({ onLogout }) {
 
+    const user = useSelector(state => state.user)
+    const [userState, setUser] = useState(user)
+
+    useEffect(() => {
+        setUser(user)
+    }, [user])
+
     return (
         <>
             <nav>
                 <ul>
+                    <li>Hi, {user.firstName} {userState.lastName}</li>
                     <li><NavLink to="/">Home</NavLink></li>
                     <li><NavLink to="/myorders">My orders</NavLink></li>
                     <li><Basket /></li>
