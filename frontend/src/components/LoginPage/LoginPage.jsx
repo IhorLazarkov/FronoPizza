@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { login, logout, restoreUser, signup } from '../../store/session'
 
 import Navigation from "../Navigation/Navigation"
+import { clearCart } from "../../store/cart"
 
 export default function LoginPage() {
   const dispatch = useDispatch()
@@ -14,7 +15,11 @@ export default function LoginPage() {
   // UI state
   const [loggedInUser, setLoggedInUser] = useState(user)
 
-  const onLogout = () => dispatch(logout())
+  const onLogout = () => {
+    dispatch(logout()).then( () => {
+      dispatch(clearCart())
+    })
+  }
 
   useEffect(() => {
     dispatch(restoreUser()).then((res) => {

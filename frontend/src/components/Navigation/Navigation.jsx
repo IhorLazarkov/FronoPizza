@@ -7,7 +7,7 @@ import { clearCart } from "../../store/cart"
 import { NavLink, Outlet } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 function Basket() {
 
@@ -17,7 +17,6 @@ function Basket() {
     const navigator = useNavigate()
     const goToCart = () => navigator("/mycart")
 
-    // UI state
     const [inCard, setInCard] = useState(0);
 
     useEffect(() => {
@@ -57,8 +56,8 @@ export default function Navigation({ onLogout }) {
         <>
             <nav>
                 <ul>
-                    <li>Hi, {user.firstName} {userState.lastName}</li>
-                    <li><NavLink to="/">Home</NavLink></li>
+                    <li><i>Hi</i>, {user.firstName} {userState.lastName}</li>
+                    <li><NavLink to="/">Menu</NavLink></li>
                     <li><NavLink to="/myorders">My orders</NavLink></li>
                     <li><Basket /></li>
                     <li><NavLink to="/myfavorites">My faivorites</NavLink></li>
