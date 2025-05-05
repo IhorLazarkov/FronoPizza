@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 export default function MyCart() {
     const dispatch = useDispatch()
     const cart = useSelector(state => state.cart)
-    const [cartItems, setCartItems] = useState(cart || { pizzas: [], ingredients: [] })
+    const [cartItems, setCartItems] = useState(cart)
     const [isEnableCheckout, setIsEnableCheckout] = useState(false)
     const [error, setError] = useState({})
     const [totalPrice, setTotalPrice] = useState(0)

@@ -14,9 +14,10 @@ export default function LoginPage() {
 
   // UI state
   const [loggedInUser, setLoggedInUser] = useState(user)
+  const [error, setError] = useState("")
 
   const onLogout = () => {
-    dispatch(logout()).then( () => {
+    dispatch(logout()).then(() => {
       dispatch(clearCart())
     })
   }
@@ -38,6 +39,7 @@ export default function LoginPage() {
         : <div id="login-page">
           {showLoginForm && <LoginForm setShowLoginForm={setShowLoginForm} setShowSignupForm={setShowSignupForm} />}
           {showSignupForm && <SignupForm setShowLoginForm={setShowLoginForm} setShowSignupForm={setShowSignupForm} />}
+          <div style={{ borderColor: "red", color: "red" }}>{error}</div>
         </div>
       }
     </>
@@ -49,8 +51,8 @@ function LoginForm({ setShowLoginForm, setShowSignupForm }) {
   const dispatch = useDispatch()
 
   // UI state
-  const [email, setEmail] = useState("demo@user.io")
-  const [password, setPassword] = useState("password")
+  const [email, setEmail] = useState()
+  const [password, setPassword] = useState()
   const [error, setError] = useState("")
 
   const onSumbitLogin = (e) => {
@@ -60,18 +62,26 @@ function LoginForm({ setShowLoginForm, setShowSignupForm }) {
         if (!res.ok) setError(res.title)
       })
   }
+  const onDemoSumbitLogin = (e) => {
+    e.preventDefault()
+    dispatch(login({ email: "demo@user.io", password: "password" }))
+      .then((res) => {
+        if (!res.ok) setError(res.title)
+      })
+  }
 
   return (
     <div className="login-form">
       <form onSubmit={onSumbitLogin}>
         <img src="../../assets/logo.png" alt="logo" />
-        <input type="text" value={email} onChange={e => setEmail(e.target.value)} />
-        <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+        <input autoFocus placeholder="email" type="text" value={email} onChange={e => setEmail(e.target.value)} />
+        <input placeholder="password" type="password" value={password} onChange={e => setPassword(e.target.value)} />
         <button className="primary" type="submit">Login</button>
         <button className="secondary" onClick={() => {
           setShowLoginForm(false)
           setShowSignupForm(true)
         }}>Signup</button>
+        <button className="critical" onClick={onDemoSumbitLogin}>Login as Demo User</button>
       </form>
       <div style={{ borderColor: "red", color: "red" }}>{error}</div>
     </div>
@@ -109,7 +119,7 @@ function SignupForm({ setShowLoginForm, setShowSignupForm }) {
     <div className="signup-form">
       <form onSubmit={onSubmitSignup}>
         <img src="../../assets/logo.png" alt="logo" />
-        <input type="text" placeholder="first name" value={firstName} onChange={e => setFirstName(e.target.value)} />
+        <input autoFocus type="text" placeholder="first name" value={firstName} onChange={e => setFirstName(e.target.value)} />
         <input type="password" placeholder="last name" value={lastName} onChange={e => setLastName(e.target.value)} />
         <input type="text" placeholder="email" value={email} onChange={e => setEmail(e.target.value)} />
         <input type="password" placeholder="password" value={password} onChange={e => setPassword(e.target.value)} />
