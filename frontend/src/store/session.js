@@ -35,15 +35,15 @@ export const signup = (user) => async (dispatch) => {
         method: "POST",
         body: JSON.stringify({
             email: user.email,
-            firstName: user.firstName || '',
-            lastName: user.lastName || '',
+            firstName: user.firstName,
+            lastName: user.lastName,
             password: user.password
         }),
     }).catch(async error => await error.json());
 
     if (response.ok) {
         const data = await response.json();
-        dispatch({ type: signupAction, user: data })
+        dispatch({ type: loginAction, user: data })
         return response;
     }
 

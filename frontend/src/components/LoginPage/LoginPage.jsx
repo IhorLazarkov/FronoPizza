@@ -1,29 +1,20 @@
 import "./LoginPage.css"
 import { useDispatch, useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
-import { login, logout, restoreUser } from '../../store/session'
+import { login, logout, restoreUser, signup } from '../../store/session'
 
 import Navigation from "../Navigation/Navigation"
 
 export default function LoginPage() {
   const dispatch = useDispatch()
   const user = useSelector(state => state.user)
+  const [showLoginForm, setShowLoginForm] = useState(true)
+  const [showSignupForm, setShowSignupForm] = useState(false)
 
   // UI state
-  const [email, setEmail] = useState("demo@user.io")
-  const [password, setPassword] = useState("password")
-  const [error, setError] = useState("")
   const [loggedInUser, setLoggedInUser] = useState(user)
 
-  const onSumbitLogin = (e) => {
-    e.preventDefault()
-    dispatch(login({ email, password }))
-      .then((res) => {
-        if (!res.ok) setError(res.title)
-      })
-  }
-
-  const onLogout = () => { dispatch(logout()) }
+  const onLogout = () => dispatch(logout())
 
   useEffect(() => {
     dispatch(restoreUser()).then((res) => {
@@ -39,15 +30,92 @@ export default function LoginPage() {
     <>
       {Object.values(loggedInUser).length
         ? <Navigation onLogout={onLogout} />
-        : <>
-          <form onSubmit={onSumbitLogin}>
-            <input type="text" value={email} onChange={e => setEmail(e.target.value)} />
-            <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-            <input type="submit" value="Login" />
-          </form>
-          <div style={{ borderColor: "red", color: "red" }}>{error}</div>
-        </>
+        : <div id="login-page">
+          {showLoginForm && <LoginForm setShowLoginForm={setShowLoginForm} setShowSignupForm={setShowSignupForm} />}
+          {showSignupForm && <SignupForm setShowLoginForm={setShowLoginForm} setShowSignupForm={setShowSignupForm} />}
+        </div>
       }
     </>
+  )
+}
+
+function LoginForm({ setShowLoginForm, setShowSignupForm }) {
+
+  const dispatch = useDispatch()
+
+  // UI state
+  const [email, setEmail] = useState("demo@user.io")
+  const [password, setPassword] = useState("password")
+  const [error, setError] = useState("")
+
+  const onSumbitLogin = (e) => {
+    e.preventDefault()
+    dispatch(login({ email, password }))
+      .then((res) => {
+        if (!res.ok) setError(res.title)
+      })
+  }
+
+  return (
+    <div className="login-form">
+      <form onSubmit={onSumbitLogin}>
+        <img src="../../assets/logo.png" alt="logo" />
+        <input type="text" value={email} onChange={e => setEmail(e.target.value)} />
+        <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+        <button className="primary" type="submit">Login</button>
+        <button className="secondary" onClick={() => {
+          setShowLoginForm(false)
+          setShowSignupForm(true)
+        }}>Signup</button>
+      </form>
+      <div style={{ borderColor: "red", color: "red" }}>{error}</div>
+    </div>
+  )
+}
+
+function SignupForm({ setShowLoginForm, setShowSignupForm }) {
+  const dispatch = useDispatch()
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
+  const [error, setError] = useState("")
+
+  const onSubmitSignup = (e) => {
+    e.preventDefault()
+    if (password === confirmPassword) {
+      dispatch(signup({
+        firstName,
+        lastName,
+        email,
+        password
+      }))
+        .then((res) => {
+          if (!res.ok) setError(res.title)
+          else setError(res.message)
+        })
+    } else {
+      setError("Passwords do not match")
+    }
+  }
+
+  return (
+    <div className="signup-form">
+      <form onSubmit={onSubmitSignup}>
+        <input type="text" placeholder="first name" value={firstName} onChange={e => setFirstName(e.target.value)} />
+        <input type="password" placeholder="last name" value={lastName} onChange={e => setLastName(e.target.value)} />
+        <input type="text" placeholder="email" value={email} onChange={e => setEmail(e.target.value)} />
+        <input type="password" placeholder="password" value={password} onChange={e => setPassword(e.target.value)} />
+        <input type="password" placeholder="confirm password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
+
+        <button className="primary">Signup</button>
+        <button className="secondary" onClick={() => {
+          setShowLoginForm(true)
+          setShowSignupForm(false)
+        }}>Login</button>
+      </form>
+      <div style={{ borderColor: "red", color: "red" }}>{error}</div>
+    </div>
   )
 }
