@@ -14,6 +14,7 @@ function EditConfirmation({ review }) {
     const { closeModal } = useModal();
     const [rating, setRating] = useState(review.rating);
     const [reviewText, setReviewText] = useState(review.review);
+    const [error, setErrors] = useState("");
 
     const onSaveHandler = () => {
         const newReview = {
@@ -21,21 +22,34 @@ function EditConfirmation({ review }) {
             rating,
             review: reviewText
         }
-        console.log({newReview});
+        console.log({ newReview });
         dispatch(updateReview(newReview))
             .then(closeModal)
-            .catch(err => console.log({ err }));
+            .catch(err => {
+                console.log({ err })
+                setErrors(err.message.title);
+            });
     }
 
     return (
-        <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+        <div style={{
+            width: "80%",
+            display: "flex",
+            flexDirection: "column",
+            gap: "1rem",
+            margin: "0 auto",
+        }}>
             <h3>Edit Review</h3>
-            <textarea value={reviewText} onChange={e => setReviewText(e.target.value)}></textarea>
+            <textarea
+                rows={5}
+                value={reviewText}
+                onChange={e => setReviewText(e.target.value)}></textarea>
             <input type="number" min="1" max="5" value={rating} onChange={e => setRating(e.target.value)} />
             <div style={{ display: "flex", justifyContent: "space-evenly" }}>
                 <button className="primary" onClick={onSaveHandler}>Save</button>
-                <button className='secondary' onClick={closeModal}>Cancel</button>
+                <button className='critical' onClick={closeModal}>Cancel</button>
             </div>
+            {error != "" && <p style={{ color: "red" }}>{error}</p>}
         </div>
     )
 }
@@ -51,11 +65,27 @@ function DeleteConfirmation({ review }) {
     }
 
     return (
-        <>
+        <div style={{
+            width: "80%",
+            height: "40%",
+            display: "flex",
+            flexDirection: "column",
+            gap: "1rem",
+            margin: "0 auto",
+            textAlign: "center",
+        }}>
             <h3>Delete Review?</h3>
-            <button className='secondary' onClick={closeModal}>No</button>
-            <button className="critical" onClick={onDeleteHandler}>Yes</button>
-        </>
+            <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+                <button style={{
+                    width: "100px",
+                    height: "30px",
+                }} className='secondary' onClick={closeModal}>No</button>
+                <button style={{
+                    width: "100px",
+                    height: "30px",
+                }} className="critical" onClick={onDeleteHandler}>Yes</button>
+            </div>
+        </div>
     )
 }
 
@@ -66,7 +96,7 @@ function EditButton({ onModalClose, modalComponent }) {
     const onClick = () => {
         if (onModalClose) setOnModalClose(onModalClose);
         setModalContent(modalComponent);
-        if (typeof onButtonClick === "function") onButtonClick();
+        // if (typeof onButtonClick === "function") onButtonClick();
     }
     return (
         <CiEdit onClick={onClick} />
@@ -80,7 +110,7 @@ function DeleteButton({ onModalClose, modalComponent }) {
     const onClick = () => {
         if (onModalClose) setOnModalClose(onModalClose);
         setModalContent(modalComponent);
-        if (typeof onButtonClick === "function") onButtonClick();
+        // if (typeof onButtonClick === "function") onButtonClick();
     }
     return (
         <MdOutlineDeleteOutline onClick={onClick} />

@@ -55,7 +55,7 @@ export default function Navigation({ onLogout }) {
     return (
         <>
             <nav>
-                <ul>
+                <ul style={{fontSize: "1.2rem"}}>
                     <li><i>Hi</i>, {user.firstName} {userState.lastName}</li>
                     <li><NavLink to="/">Menu</NavLink></li>
                     <li><NavLink to="/myorders">My orders</NavLink></li>

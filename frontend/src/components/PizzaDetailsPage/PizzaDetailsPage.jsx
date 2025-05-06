@@ -37,7 +37,7 @@ function ReviewForm({ pizza_id }) {
             alignItems: "center",
         }}>
             <h3>Add Review</h3>
-            <textarea value={reviewMessage} onChange={e => setReviewMessage(e.target.value)}></textarea>
+            <textarea rows={5} value={reviewMessage} onChange={e => setReviewMessage(e.target.value)}></textarea>
             <input
                 value={rating}
                 type="number" min="1" max="5"
