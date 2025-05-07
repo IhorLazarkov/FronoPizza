@@ -1,0 +1,23 @@
+.order-live-container{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.spinner.on{
+    animation: rotating 1s linear infinite;
+}
+
+.spinner.off{
+    display: none;
+}
+
+
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

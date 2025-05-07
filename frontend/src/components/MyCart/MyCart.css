@@ -1,0 +1,43 @@
+.mycart_container {
+    width: 80%;
+    margin: 0 auto;
+
+    & .mycart_item {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 30%));
+        grid-template-rows: 25%;
+
+        & .img_container {
+            width: 100%;
+            height: fit-content;
+
+            & img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
+
+        }
+        & h3 {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: var(--primary-v1);
+            color: var(--sub-secondary-v1);
+            font-size: 1.5rem;
+            font-family: var(--header-font);
+            align-content: center;
+        }
+        & p, div {
+            font-family: var(--description-font);
+        }
+    }
+
+    & .mycart_footer{
+
+        & button {
+            font-size: 1.1rem;
+        }
+    }
+}

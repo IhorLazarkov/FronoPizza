@@ -1,10 +1,8 @@
-
 import { csrfFetch } from "./csrf.js";
 
 const loginAction = "user/LOGIN"
 const logoutAction = "user/LOGOUT"
 const restoreAction = "user/RESTORE"
-const signupAction = "user/SIGNUP"
 
 /**
  * @description Login a user
@@ -36,15 +34,15 @@ export const signup = (user) => async (dispatch) => {
         method: "POST",
         body: JSON.stringify({
             email: user.email,
-            firstName: user.firstName || '',
-            lastName: user.lastName || '',
+            firstName: user.firstName,
+            lastName: user.lastName,
             password: user.password
         }),
     }).catch(async error => await error.json());
 
     if (response.ok) {
         const data = await response.json();
-        dispatch({ type: signupAction, user: data })
+        dispatch({ type: loginAction, user: data })
         return response;
     }
 
@@ -71,21 +69,20 @@ export const restoreUser = () => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json();
-        dispatch({ type: restoreAction, user: data });
+        const {user} = data
+        dispatch({ type: restoreAction, user });
         return response;
     }
 
     return response;
 }
 
-export default function session(state = {}, action) {
+export default function sessionReducer(state = {}, action) {
     switch (action.type) {
         case loginAction:
-            return { ...action.user };
         case logoutAction:
-            return action.user;
         case restoreAction:
-            return action.user;
+            return {...action.user };
         default:
             return state;
     }

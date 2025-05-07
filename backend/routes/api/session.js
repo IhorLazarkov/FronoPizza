@@ -21,6 +21,7 @@ router.post('/', async (req, res, next) => {
     await setTokenCookie(res, user);
 
     return res.json({
+        id: user.id,
         email: user.email,
         firstName: user.firstName,
         lastName: user.lastName,
@@ -44,6 +45,7 @@ router.get('/', (req, res) => {
     const { user } = req;
     if (user) {
         return res.json({
+            id: user.id,
             email: user.email,
             firstName: user.firstName,
             lastName: user.lastName,
