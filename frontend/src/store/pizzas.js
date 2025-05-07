@@ -21,12 +21,13 @@ export const fetchPizzas = () => async (dispatch) => {
 
 export default function pizzasReducer(state = {}, action) {
     switch (action.type) {
-        case GET_PIZZAS:
+        case GET_PIZZAS: {
             const newState = {};
             action.pizzas.forEach(pizza => {
                 newState[pizza.id] = pizza;
             });
             return newState;
+        }
         default:
             return state;
     }

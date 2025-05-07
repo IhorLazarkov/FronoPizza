@@ -16,7 +16,7 @@ export const addFavorite = (id) => async (dispatch) => {
 
     if (response.ok) {
         const favorites = await response.json();
-        dispatch({ type: ADD_FAVORITES, favorites: {id} });
+        dispatch({ type: ADD_FAVORITES, favorites: { id } });
         return favorites;
     }
 
@@ -35,7 +35,7 @@ export const removeFavorite = (id) => async (dispatch) => {
 
     if (response.ok) {
         const favorites = await response.json();
-        dispatch({ type: REMOVE_FAVORITES, favorites: {id} });
+        dispatch({ type: REMOVE_FAVORITES, favorites: { id } });
         return favorites;
     }
 
@@ -65,9 +65,10 @@ const favoritesReducer = (state = [], action) => {
             return [...state, action.favorites];
         case RECEIVE_FAVORITES:
             return [...action.favorites];
-        case REMOVE_FAVORITES:
+        case REMOVE_FAVORITES: {
             const newState = state.filter(favorite => favorite.id !== action.favorites.id);
             return [...newState]
+        }
         default:
             return state;
     }

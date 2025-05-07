@@ -25,13 +25,13 @@ export const createOrder = (order) => async (dispatch) => {
     const pizzas = order.pizzas || []
     const ingredients = order.ingredients || []
 
-    pizzas.forEach(({pizza}) => {
+    pizzas.forEach(({ pizza }) => {
         payloadPizzas.push({
             id: pizza.id,
             price: pizza.price
         })
     })
-    ingredients.forEach(({ingredient}) => {
+    ingredients.forEach(({ ingredient }) => {
         payloadIngredients.push({
             id: ingredient.id,
             price: ingredient.price
@@ -67,28 +67,32 @@ const initialState = {
 
 export default function cartReducer(state = initialState, action) {
     switch (action.type) {
-        case "ADD_PIZZA_TO_CART":
+        case "ADD_PIZZA_TO_CART": {
             const pizzas = [...state.pizzas]
             const newPizza = action.payload
             pizzas.push({ id: pizzas.length + 1, pizza: newPizza })
             const newState = { ...state, pizzas }
             return newState
-        case "ADD_INGREDIENT_TO_CART":
+        }
+        case "ADD_INGREDIENT_TO_CART": {
             const ingredients = [...state.ingredients]
             const newIngredient = action.payload
             ingredients.push({ id: ingredients.length + 1, ingredient: newIngredient })
             const newStateIngredient = { ...state, ingredients }
             return newStateIngredient
-        case "REMOVE_PIZZA_FROM_CART":
+        }
+        case "REMOVE_PIZZA_FROM_CART": {
             const pizzasBeforeRemove = [...state.pizzas]
-            const {id} = action.payload
+            const { id } = action.payload
             const newStateRemove = pizzasBeforeRemove.filter(pizza => pizza.id !== id)
             return { ...state, pizzas: newStateRemove }
-        case "REMOOVE_INGREDIENT_FROM_CART":
+        }
+        case "REMOOVE_INGREDIENT_FROM_CART": {
             const ingredientsBeforeRemove = [...state.ingredients]
-            const {id: idIngredient} = action.payload
+            const { id: idIngredient } = action.payload
             const newStateRemoveIngredient = ingredientsBeforeRemove.filter(ingredient => ingredient.id !== idIngredient)
             return { ...state, ingredients: newStateRemoveIngredient }
+        }
         case "CLEAR_CART":
             return initialState
         // Get all
