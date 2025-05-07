@@ -3,7 +3,6 @@ import { csrfFetch } from "./csrf.js";
 const loginAction = "user/LOGIN"
 const logoutAction = "user/LOGOUT"
 const restoreAction = "user/RESTORE"
-const signupAction = "user/SIGNUP"
 
 /**
  * @description Login a user

@@ -81,7 +81,7 @@ const reviewsReducer = (state = [], action) => {
             return action.reviews;
         case ADD_REVIEW:
             return [...state, action.payload];
-        case UPDATE_REVIEW:
+        case UPDATE_REVIEW: {
             const newStateOnUpdate = [];
             state.forEach(r => {
                 if (r.id === action.payload.id) {
@@ -90,9 +90,11 @@ const reviewsReducer = (state = [], action) => {
                     newStateOnUpdate.push(r);
             })
             return [...newStateOnUpdate]
-        case DELETE_REVIEW:
+        }
+        case DELETE_REVIEW: {
             const newStateOnDelete = state.filter(review => review.id !== action.id);
             return [...newStateOnDelete];
+        }
         default:
             return state;
     }

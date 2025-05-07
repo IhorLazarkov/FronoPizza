@@ -23,12 +23,13 @@ export const getIngredients = () => async (dispatch) => {
 
 export default function ingedientsReducer(state = {}, action) {
     switch (action.type) {
-        case GET_INGREDIENTS:
+        case GET_INGREDIENTS: {
             const newState = {}
             action.ingredients.forEach(ingredient => {
                 newState[ingredient.id] = ingredient
             })
             return newState
+        }
         default:
             return state
     }
