@@ -13,6 +13,14 @@ Author: [Ihor Lazarkov](https://ihorlazarkov.github.io/IhorLazarkov/)
 
 </details>
 
+## Architecture
+
+<details open>
+    <summary>Architecture</summary>
+
+![db schema](./docs/forno-roma-architecture.png)
+</details>
+
 ## Colors
 
 <details>
