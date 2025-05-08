@@ -16,7 +16,7 @@ export default function OrderLivePage() {
 
   //on mount
   useEffect(() => {
-    const ws = new WebSocket(`ws://localhost:3001/`);
+    const ws = new WebSocket(`ws://localhost:3005/`);
 
     ws.onmessage = messgae => {
 
