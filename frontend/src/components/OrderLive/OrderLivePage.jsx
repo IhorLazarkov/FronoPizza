@@ -40,7 +40,6 @@ export default function OrderLivePage() {
 
     ws.onerror = (err) => {
       console.error({ err });
-      // setError(`Connection error: ${JSON.stringify(err)}`);
     }
 
     ws.onclose = () => {
@@ -52,7 +51,7 @@ export default function OrderLivePage() {
     return () => {
       ws.close();
     };
-  }, [])
+  }, [id])
 
   return (
     <div className="order-live-container">

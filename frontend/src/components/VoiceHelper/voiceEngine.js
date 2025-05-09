@@ -1,6 +1,6 @@
-var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
-var SpeechGrammarList = SpeechGrammarList || window.webkitSpeechGrammarList
-var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
+var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
+var SpeechGrammarList = window.SpeechGrammarList || window.webkitSpeechGrammarList
+var SpeechRecognitionEvent = window.SpeechRecognitionEvent || window.webkitSpeechRecognitionEvent
 
 let finalRecognizedWords = ""
 let products = []
@@ -67,7 +67,6 @@ recognition.onspeechend = function () {
             commandStractured.target += 1
         }
         if (product.includes(lcWord)) {
-            console.log("product was recognized: ", lcWord);
             products.push(lcWord)
             commandStractured.product += 1
         }
