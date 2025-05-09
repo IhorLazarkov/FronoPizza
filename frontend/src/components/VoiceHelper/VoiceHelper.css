@@ -1,15 +1,55 @@
 #voice_helper {
   width: clamp(50%, 1.2rem, 60vw);
+  height: calc(100vh - 150px);
   border: 1px solid black;
+  padding: 1rem;
+  background-color: var(--secondary-v1);
+  overflow-y: scroll;
 
   & svg {
     cursor: pointer;
     font-size: 4rem;
-    align-self: center;
+    margin: 1rem;
     padding-block: 1rem;
-    margin-block: 1rem;
     border: 1px solid black;
     border-radius: 10%;
+  }
+
+  & div {
+    margin: 5px;
+    padding: 10px 10px;
+    border-radius: 1rem;
+    box-shadow: -3px 3px 3px 0px rgba(0, 0, 0, 0.1);
+  }
+
+  & div.agent {
+    border: 1px solid #ddd6d6;
+    background-color: #f0f0f0;
+  }
+
+  & div.client {
+    border: 1px solid #d0c8c8;
+    background-color: #e8e2e2;
+  }
+
+  & div.agent::before{
+    content: "Agent: ";
+    font-weight: bold;
+    color: var(--primary-v1);
+  }
+
+  & div.client::before{
+    content: "You: ";
+    font-weight: bold;
+    color: var(--third-v1);
+  }
+
+  & .client {
+    text-align: right;
+  }
+
+  & .agent {
+    text-align: left;
   }
 }
 

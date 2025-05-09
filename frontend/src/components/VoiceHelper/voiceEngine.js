@@ -5,8 +5,8 @@ var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEv
 let finalRecognizedWords = ""
 let products = []
 let commandStractured
-
 const eventTarget = new EventTarget();
+
 // vacabulary
 const action = ['i', 'to', 'want', 'like', 'love', 'would', 'look'];
 const target = ['pizza', 'cheese']
@@ -16,7 +16,7 @@ const cleanupActions = ['clear', 'clear all']
 const finalActions = ['checkout', 'pay', 'order', 'buy']
 
 const recognition = new SpeechRecognition();
-console.log({ recognition });
+// console.log({ recognition });
 
 if (SpeechGrammarList) {
     const speechRecognitionList = new SpeechGrammarList();
@@ -76,16 +76,13 @@ recognition.onspeechend = function () {
         }
     })
 
-    console.log("Dispatching event");
-    const event = new CustomEvent("data", {
+    eventTarget.dispatchEvent(new CustomEvent("data", {
         detail: {
             products,
             commandStractured,
             finalRecognizedWords
         }
-    })
-    eventTarget.dispatchEvent(event);
-    console.log("Dispatching event end");
+    }));
 }
 
 recognition.onerror = function (event) {

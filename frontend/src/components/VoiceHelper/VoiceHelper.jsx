@@ -16,7 +16,19 @@ export default function VoiceHelper({ isHelperShow }) {
     const ingredients = useSelector((state) => state.ingredients);
 
     const [products, setProducts] = useState([]);
-    const [userCommand, setUserCommand] = useState([]);
+    const [userCommand, setUserCommand] = useState([{
+        client: "agent",
+        command: "Hey, I am here to help you. I can understand what you say and add pizzas to your cart for you"
+    }, {
+        client: "agent",
+        command: "Please click on the mic to start speaking"
+    }, {
+        client: "agent",
+        command: "And when you done, click the red square to stop"
+    }, {
+        client: "agent",
+        command: "What would you like to order today?"
+    }]);
     const [commandStructured, setCommandStructured] = useState({
         intent: 0,
         target: 0,
@@ -24,7 +36,11 @@ export default function VoiceHelper({ isHelperShow }) {
         finalAction: 0
     });
 
-    const contextValue = { setUserCommand, setCommandStructured, setProducts }
+    const contextValue = {
+        setUserCommand,
+        setCommandStructured,
+        setProducts
+    }
 
     useEffect(() => {
         const addedProducts = [];
@@ -53,10 +69,13 @@ export default function VoiceHelper({ isHelperShow }) {
             })
         }
         if (addedProducts.length > 0) {
-            setUserCommand(prev => {
-                const cmd = `I added ${addedProducts.map(p => p.name).join(",")} to your cart`
-                return [...prev, cmd];
-            });
+            setTimeout(() => {
+                setUserCommand(prev => {
+                    const products = addedProducts.map(p => p.name).join(",")
+                    const cmd = `I just added ${products} to your cart`
+                    return [...prev, { client: "agent", command: cmd }];
+                });
+            },500)
         }
     }, [products])
 
@@ -69,7 +88,9 @@ export default function VoiceHelper({ isHelperShow }) {
         >
             <CommandContext.Provider value={contextValue}>
                 <ButtonMic />
-                {userCommand.length > 0 && userCommand.map((c, i) => <p key={i}>{c}</p>)}
+                {userCommand.length > 0 && userCommand.map(({ client, command }, i) => (
+                    <div key={i} className={client}>{command}</div>
+                ))}
             </CommandContext.Provider>
         </div>
     )
@@ -102,8 +123,9 @@ function ButtonMic() {
             });
 
             setProducts([...products]);
-            setUserCommand(prev => [...prev, finalRecognizedWords]);
+            setUserCommand(prev => [...prev, { client: "client", command: finalRecognizedWords }]);
             setCommandStructured({ ...commandStructured });
+
         }, { signal });
         return () => abortController.abort();
     }, [])
