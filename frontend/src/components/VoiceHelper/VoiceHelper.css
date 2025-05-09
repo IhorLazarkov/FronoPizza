@@ -1,0 +1,22 @@
+#voice_helper {
+  width: clamp(50%, 1.2rem, 60vw);
+  border: 1px solid black;
+
+  & svg {
+    cursor: pointer;
+    font-size: 4rem;
+    align-self: center;
+    padding-block: 1rem;
+    margin-block: 1rem;
+    border: 1px solid black;
+    border-radius: 10%;
+  }
+}
+
+.voice_helper_hide {
+  display: none;
+}
+
+.voice_helper_show {
+  display: block;
+}

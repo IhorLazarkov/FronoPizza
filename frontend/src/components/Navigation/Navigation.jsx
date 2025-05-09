@@ -2,12 +2,15 @@ import "./Navigation.css"
 
 import { CiShoppingBasket } from "react-icons/ci";
 import { IoCloseCircle } from "react-icons/io5";
+import { FaMicrophone } from "react-icons/fa6";
+
 import { clearCart } from "../../store/cart"
 
 import { NavLink, Outlet } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from "react";
+import VoiceHelper from "../VoiceHelper";
 
 function Basket() {
 
@@ -47,6 +50,11 @@ export default function Navigation({ onLogout }) {
 
     const user = useSelector(state => state.user)
     const [userState, setUser] = useState(user)
+    const [isHelperShow, setIsHelperShow] = useState(false)
+
+    const voiceHelperToggle = () => {
+        setIsHelperShow(prev => !prev)
+    }
 
     useEffect(() => {
         setUser(user)
@@ -55,19 +63,23 @@ export default function Navigation({ onLogout }) {
     return (
         <>
             <nav>
-                <ul style={{fontSize: "1.2rem"}}>
+                <ul style={{ fontSize: "1.2rem" }}>
                     <li><i>Hi</i>, {user.firstName} {userState.lastName}</li>
                     <li><NavLink to="/">Menu</NavLink></li>
                     <li><NavLink to="/myorders">My orders</NavLink></li>
                     <li><Basket /></li>
                     <li><NavLink to="/myfavorites">My faivorites</NavLink></li>
                     <li><NavLink to="/myreviews">My reviews</NavLink></li>
+                    <li><a href="#" onClick={voiceHelperToggle}><FaMicrophone /></a></li>
                     <li>
                         <button className='critical' onClick={onLogout}>Logout</button>
                     </li>
                 </ul>
             </nav>
-            <Outlet />
+            <div style={{display: "flex"}}>
+                <Outlet />
+                <VoiceHelper isHelperShow={isHelperShow} />
+            </div>
         </>
     )
 }
