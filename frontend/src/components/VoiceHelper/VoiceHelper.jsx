@@ -67,7 +67,7 @@ export default function VoiceHelper({ isHelperShow }) {
                     const cmd = `I just added ${products} to your cart`
                     return [...prev, { client: "agent", command: cmd }];
                 });
-            }, 500)
+            }, 300)
         }
     }, [products])
 
@@ -94,11 +94,9 @@ function ButtonMic() {
     const { setUserCommand, setProducts } = useCommandContext()
 
     const onStartRecording = () => {
-        console.log("Recording started");
         recognition.start();
     }
     const onStopRecording = () => {
-        console.log("Recording stopped");
         recognition.stop();
     }
 

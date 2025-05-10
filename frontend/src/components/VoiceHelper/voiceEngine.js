@@ -54,11 +54,9 @@ recognition.onresult = function (event) {
 }
 
 recognition.onspeechend = function () {
-    console.log("On speech end");
     finalRecognizedWords.split(" ").forEach((word) => {
 
         const lcWord = word.toString().toLowerCase().trim();
-        console.log("processing word: ", lcWord);
 
         if (action.includes(lcWord)) {
             commandStractured.intent += 1
@@ -85,7 +83,7 @@ recognition.onspeechend = function () {
 }
 
 recognition.onerror = function (event) {
-    console.log("Error: " + event.error);
+    console.err("Error: " + event.error);
 }
 
 window.recognition = recognition

@@ -26,14 +26,14 @@
     margin: 0 auto;
     padding: 2rem;
     width: 80%;
-    height: 70%;
+    height: 90%;
     display: flex;
     flex-direction: column;
     gap: 10px;
 
     & input,
     button {
-      height: 2rem;
+      height: 3rem;
     }
   }
 }
