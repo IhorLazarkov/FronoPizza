@@ -1,5 +1,5 @@
 #voice_helper {
-  width: clamp(50%, 1.2rem, 60vw);
+  width: 30%;
   height: calc(100vh - 150px);
   border: 1px solid black;
   padding: 1rem;
@@ -8,11 +8,15 @@
 
   & svg {
     cursor: pointer;
-    font-size: 4rem;
-    margin: 1rem;
-    padding-block: 1rem;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    margin: 0.5rem;
     border: 1px solid black;
-    border-radius: 10%;
+    border-radius: 50%;
+    position: fixed;
+    bottom: 0rem;
+    right: 4rem;
+    background-color: inherit;
   }
 
   & div {
@@ -20,25 +24,26 @@
     padding: 10px 10px;
     border-radius: 1rem;
     box-shadow: -3px 3px 3px 0px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s ease-in-out forwards;
   }
 
   & div.agent {
-    border: 1px solid #ddd6d6;
-    background-color: #f0f0f0;
+    border: 1px solid #d4cfcf;
+    background-color: #e8e7e7;
   }
 
   & div.client {
     border: 1px solid #d0c8c8;
-    background-color: #e8e2e2;
+    background-color: #f7f5f5;
   }
 
-  & div.agent::before{
+  & div.agent::before {
     content: "Agent: ";
     font-weight: bold;
     color: var(--primary-v1);
   }
 
-  & div.client::before{
+  & div.client::before {
     content: "You: ";
     font-weight: bold;
     color: var(--third-v1);
@@ -53,10 +58,55 @@
   }
 }
 
+.voice_helper_hidden {
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
 .voice_helper_hide {
-  display: none;
+  animation: slideOut 0.5s ease-in-out forwards;
+  position: absolute;
+  right: 0;
+  top: 0;
+  opacity: 0;
 }
 
 .voice_helper_show {
-  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+  animation: slideIn 0.5s ease-in-out forwards;
+  z-index: 1;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

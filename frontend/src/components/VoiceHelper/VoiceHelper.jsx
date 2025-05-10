@@ -1,5 +1,5 @@
 import "./VoiceHelper.css";
-import { useState, useContext, createContext, useEffect } from "react";
+import { useState, useContext, createContext, useEffect, use } from "react";
 import { BsMicFill } from "react-icons/bs";
 import { HiStop } from "react-icons/hi";
 
@@ -9,13 +9,14 @@ import { addIngredientToCart, addPizzaToCart } from '../../store/cart';
 const CommandContext = createContext();
 const useCommandContext = () => useContext(CommandContext);
 
-export default function VoiceHelper({ isHelperShow }) {
+export default function VoiceHelper({ clazzName }) {
 
     const dispatch = useDispatch();
     const pizzas = useSelector((state) => state.pizzas);
     const ingredients = useSelector((state) => state.ingredients);
 
     const [products, setProducts] = useState([]);
+    const [command, setCommand] = useState([]);
     const [userCommand, setUserCommand] = useState([
         {
             client: "agent",
@@ -33,6 +34,19 @@ export default function VoiceHelper({ isHelperShow }) {
     ]);
 
     const contextValue = { setUserCommand, setProducts }
+
+    useEffect(() => {
+        const tmIndex = setTimeout(() => {
+            setCommand(prev => {
+                return [
+                    ...prev,
+                    userCommand[userCommand.length - 1]
+                ];
+            });
+        }, 200)
+
+        return () => clearTimeout(tmIndex);
+    }, [userCommand])
 
     useEffect(() => {
         const addedProducts = [];
@@ -74,15 +88,15 @@ export default function VoiceHelper({ isHelperShow }) {
     return (
         <div
             id="voice_helper"
-            className={isHelperShow
-                ? "voice_helper_show"
-                : "voice_helper_hide"}
+            className={clazzName}
         >
             <CommandContext.Provider value={contextValue}>
+                {clazzName.indexOf("show") > 0
+                    && userCommand.length > 0 &&
+                    userCommand.map(({ client, command }, i) => {
+                        return <div key={i} className={client}>{command}</div>
+                    })}
                 <ButtonMic />
-                {userCommand.length > 0 && userCommand.map(({ client, command }, i) => (
-                    <div key={i} className={client}>{command}</div>
-                ))}
             </CommandContext.Provider>
         </div>
     )

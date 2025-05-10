@@ -3,13 +3,14 @@ import "./Navigation.css"
 import { CiShoppingBasket } from "react-icons/ci";
 import { IoCloseCircle } from "react-icons/io5";
 import { FaMicrophone } from "react-icons/fa6";
+import { RxCross2 } from "react-icons/rx";
 
 import { clearCart } from "../../store/cart"
 
 import { NavLink, Outlet } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import VoiceHelper from "../VoiceHelper";
 
 function Basket() {
@@ -50,10 +51,12 @@ export default function Navigation({ onLogout }) {
 
     const user = useSelector(state => state.user)
     const [userState, setUser] = useState(user)
-    const [isHelperShow, setIsHelperShow] = useState(false)
+    const isHelperShow = useRef(false)
+    const [voiceHelperClass, setVoiceHelperClass] = useState("voice_helper_hidden")
 
     const voiceHelperToggle = () => {
-        setIsHelperShow(prev => !prev)
+        isHelperShow.current = !isHelperShow.current
+        setVoiceHelperClass(isHelperShow.current ? "voice_helper_show" : "voice_helper_hide")
     }
 
     useEffect(() => {
@@ -70,15 +73,44 @@ export default function Navigation({ onLogout }) {
                     <li><Basket /></li>
                     <li><NavLink to="/myfavorites">My faivorites</NavLink></li>
                     <li><NavLink to="/myreviews">My reviews</NavLink></li>
-                    <li><a href="#" onClick={voiceHelperToggle}><FaMicrophone /></a></li>
                     <li>
                         <button className='critical' onClick={onLogout}>Logout</button>
                     </li>
                 </ul>
             </nav>
-            <div style={{display: "flex"}}>
+            <div style={{
+                display: "flex",
+                position: "relative"
+            }}>
                 <Outlet />
-                <VoiceHelper isHelperShow={isHelperShow} />
+                <VoiceHelper clazzName={voiceHelperClass}/>
+                <div style={{
+                    alignItems: "center",
+                    position: "fixed",
+                    bottom: "1.3rem",
+                    right: "-0.5rem",
+                    zIndex: "3",
+                }}>
+                    <a href="#"
+                        onClick={voiceHelperToggle}
+                        style={{
+                            fontSize: "1.8rem",
+                            borderRadius: "50%",
+                            padding: "0.5rem",
+                            margin: "1rem",
+                            color: "var(--third-v1)",
+                            border: "1px solid var(--third-v1)",
+                            backgroundColor: "var(--sub-secondary-v1)",
+
+                        }}>
+                        {isHelperShow.current
+                            ? <RxCross2 style={{
+                                widthdth: "1.3rem",
+                                height: "1.3rem",
+                            }} />
+                            : <FaMicrophone style={{ widthdth: "1.3rem", height: "1.3rem" }} />}
+                    </a>
+                </div>
             </div>
         </>
     )
