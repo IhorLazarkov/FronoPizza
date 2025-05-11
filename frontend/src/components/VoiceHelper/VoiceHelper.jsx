@@ -1,5 +1,5 @@
 import "./VoiceHelper.css";
-import { useState, useContext, createContext, useEffect, use } from "react";
+import { useState, useContext, createContext, useEffect } from "react";
 import { BsMicFill } from "react-icons/bs";
 import { HiStop } from "react-icons/hi";
 
@@ -16,7 +16,6 @@ export default function VoiceHelper({ clazzName }) {
     const ingredients = useSelector((state) => state.ingredients);
 
     const [products, setProducts] = useState([]);
-    const [command, setCommand] = useState([]);
     const [userCommand, setUserCommand] = useState([
         {
             client: "agent",
@@ -34,19 +33,6 @@ export default function VoiceHelper({ clazzName }) {
     ]);
 
     const contextValue = { setUserCommand, setProducts }
-
-    useEffect(() => {
-        const tmIndex = setTimeout(() => {
-            setCommand(prev => {
-                return [
-                    ...prev,
-                    userCommand[userCommand.length - 1]
-                ];
-            });
-        }, 200)
-
-        return () => clearTimeout(tmIndex);
-    }, [userCommand])
 
     useEffect(() => {
         const addedProducts = [];
@@ -91,12 +77,10 @@ export default function VoiceHelper({ clazzName }) {
             className={clazzName}
         >
             <CommandContext.Provider value={contextValue}>
-                {clazzName.indexOf("show") > 0
-                    && userCommand.length > 0 &&
-                    userCommand.map(({ client, command }, i) => {
-                        return <div key={i} className={client}>{command}</div>
-                    })}
-                <ButtonMic />
+                <ButtonMic style={{ zIndex: 3 }} />
+                {userCommand.map(({ client, command }, i) => (
+                    <div key={i} className={client}>{command}</div>
+                ))}
             </CommandContext.Provider>
         </div>
     )

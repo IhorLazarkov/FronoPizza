@@ -79,11 +79,10 @@ export default function Navigation({ onLogout }) {
                 </ul>
             </nav>
             <div style={{
-                display: "flex",
                 position: "relative"
             }}>
                 <Outlet />
-                <VoiceHelper clazzName={voiceHelperClass}/>
+                <VoiceHelper clazzName={voiceHelperClass} />
                 <div style={{
                     alignItems: "center",
                     position: "fixed",
