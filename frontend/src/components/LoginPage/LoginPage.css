@@ -24,7 +24,6 @@
     border: 1px solid var(--sub-secondary-v1);
     backdrop-filter: blur(0.15rem);
     border-radius: 0rem;
-    /* margin: 0 auto; */
     padding: 2rem;
     width: 80%;
     height: 90%;
@@ -47,5 +46,18 @@
 .signup-form {
   & form {
     height: 90%;
+  }
+}
+
+.login-form,
+.signup-form {
+
+  & input:is(:user-valid) {
+    border: 3px solid green;
+  }
+
+  & input:is(:user-invalid) {
+    border: 3px solid red;
+    background-color: lightcoral;
   }
 }
