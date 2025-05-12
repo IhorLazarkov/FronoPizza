@@ -6,6 +6,8 @@ import { HiStop } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { addIngredientToCart, addPizzaToCart } from '../../store/cart';
 
+import { Tooltip } from 'react-tooltip'
+
 const CommandContext = createContext();
 const useCommandContext = () => useContext(CommandContext);
 
@@ -19,13 +21,7 @@ export default function VoiceHelper({ clazzName }) {
     const [userCommand, setUserCommand] = useState([
         {
             client: "agent",
-            command: "Hey, I am here to help you. I can understand what you say and add pizzas to your cart for you"
-        }, {
-            client: "agent",
-            command: "Please click on the mic to start speaking"
-        }, {
-            client: "agent",
-            command: "And when you done, click the red square to stop"
+            command: "Hey, I am here to help."
         }, {
             client: "agent",
             command: "What would you like to order today?"
@@ -114,14 +110,31 @@ function ButtonMic() {
     return (
         <>
             {isRecording
-                ? <HiStop style={{ color: "red" }} onClick={() => {
-                    setIsRecording(false)
-                    onStopRecording()
-                }} />
-                : <BsMicFill onClick={() => {
-                    setIsRecording(true)
-                    onStartRecording()
-                }} />}
+                ? <HiStop
+                    style={{ color: "red" }} onClick={() => {
+                        setIsRecording(false)
+                        onStopRecording()
+                    }} />
+                : <BsMicFill
+                    id="mic-speak"
+                    onClick={() => {
+                        setIsRecording(true)
+                        onStartRecording()
+                    }} />}
+            <Tooltip
+                anchorSelect="#mic-speak"
+                defaultIsOpen={true}
+                place="top"
+                style={{ zIndex: "3", width: "clamp(10rem, 1 rem, 20rem)", height: "4rem" }}
+            >
+                <div>
+                    <ul style={{ listStyle: "none", margin: "0"}}>
+                        <li>Press this mic to speak.</li>
+                        <li>Press it again when finished.</li>
+                    </ul>
+                </div>
+            </Tooltip>
+
         </>
     )
 }

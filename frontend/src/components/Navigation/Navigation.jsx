@@ -11,7 +11,10 @@ import { NavLink, Outlet } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from "react";
+
 import VoiceHelper from "../VoiceHelper";
+import { Tooltip } from 'react-tooltip'
+import 'react-tooltip/dist/react-tooltip.css'
 
 function Basket() {
 
@@ -83,13 +86,15 @@ export default function Navigation({ onLogout }) {
             }}>
                 <Outlet />
                 <VoiceHelper clazzName={voiceHelperClass} />
-                <div style={{
-                    alignItems: "center",
-                    position: "fixed",
-                    bottom: "1.3rem",
-                    right: "-0.5rem",
-                    zIndex: "3",
-                }}>
+                <div
+                    id="voice_helper_button"
+                    style={{
+                        alignItems: "center",
+                        position: "fixed",
+                        bottom: "1.3rem",
+                        right: "-0.5rem",
+                        zIndex: "3",
+                    }}>
                     <a href="#"
                         onClick={voiceHelperToggle}
                         style={{
@@ -103,14 +108,26 @@ export default function Navigation({ onLogout }) {
 
                         }}>
                         {isHelperShow.current
-                            ? <RxCross2 style={{
-                                widthdth: "1.3rem",
-                                height: "1.3rem",
-                            }} />
+                            ? <RxCross2 style={{ height: "1.3rem" }} />
                             : <FaMicrophone style={{ widthdth: "1.3rem", height: "1.3rem" }} />}
                     </a>
                 </div>
             </div>
+            <Tooltip
+                anchorSelect="#voice_helper_button"
+                defaultIsOpen={true}
+                place="left-start"
+                style={{
+                    width: "clamp(5re, 1rem, 10rem)",
+                    fontSize: "1rem",
+                }}
+            >
+                <div style={{
+                    position: "relative"
+                }}>
+                    <p>Add pizza to your cart with voice.</p>
+                </div>
+            </Tooltip>
         </>
     )
 }
