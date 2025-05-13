@@ -21,10 +21,9 @@
   
   #modal-content {
     position: absolute;
-    background-color: white;
+    background-color: var(--sub-secondary-v1);
     
-    min-width: 30%;
-    min-height: 40%;
-
-    border-radius: 10px;
+    min-width: max-content;
+    max-width: 30%;
+    height: auto;
   }

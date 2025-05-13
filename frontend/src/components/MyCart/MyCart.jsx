@@ -2,7 +2,7 @@ import "./MyCart.css"
 
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { createOrder, getCart } from "../../store/cart"
+import { createOrder, getCart, removeFromCart, removeIngredientFromCart } from "../../store/cart"
 import { useNavigate } from 'react-router-dom';
 
 export default function MyCart() {
@@ -27,6 +27,16 @@ export default function MyCart() {
     }
     // Go back to shopping
     const continueHandler = () => navigator("/")
+
+    // Remove pizza from cart
+    const removePizza = (pizza) => {
+        dispatch(removeFromCart(pizza))
+    }
+
+    // Remove ingredient from cart
+    const removeIngredient = (ingredient) => {
+        dispatch(removeIngredientFromCart(ingredient))
+    }
 
     useEffect(() => {
         dispatch(getCart())
@@ -70,6 +80,15 @@ export default function MyCart() {
                         <h3>{item.pizza.name}</h3>
                         <p>{item.pizza.description}</p>
                         <div>Cost: ${item.pizza.price}</div>
+                        <button
+                            className="critical"
+                            style={{
+                                width: "fit-content",
+                                fontSize: "1.2rem",
+                                marginLeft: "1rem"
+                            }}
+                            onClick={() => removePizza(item)}
+                        >Revome from cart</button>
                     </div>
                 </div>
             ))}
@@ -95,6 +114,15 @@ export default function MyCart() {
                     }}>
                         <div>{item.ingredient.name}</div>
                         <div>Cost: ${item.ingredient.price}</div>
+                        <button
+                            className="critical"
+                            style={{
+                                width: "fit-content",
+                                fontSize: "1.2rem",
+                                marginLeft: "1rem"
+                            }}
+                            onClick={() => removeIngredient(item)}
+                        >Revome from cart</button>
                     </div>
                 </div>
             ))}

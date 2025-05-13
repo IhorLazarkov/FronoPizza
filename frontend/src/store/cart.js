@@ -12,6 +12,10 @@ export const removeFromCart = (pizza) => ({
     type: "REMOVE_PIZZA_FROM_CART",
     payload: pizza
 })
+export const removeIngredientFromCart = (ingredient) => ({
+    type: "REMOOVE_INGREDIENT_FROM_CART",
+    payload: ingredient
+})
 export const clearCart = () => ({
     type: "CLEAR_CART"
 })
