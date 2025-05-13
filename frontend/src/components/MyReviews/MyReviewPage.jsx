@@ -33,21 +33,30 @@ function EditConfirmation({ review }) {
 
     return (
         <div style={{
-            width: "80%",
+            borderBlock: "border-box",
             display: "flex",
             flexDirection: "column",
             gap: "1rem",
-            margin: "0 auto",
         }}>
-            <h3>Edit Review</h3>
+            <h3
+                style={{
+                    margin: "0",
+                    paddingTop: "10%",
+                    backgroundColor: "var(--primary-v1)",
+                    height: "5rem",
+                    color: "var(--sub-secondary-v1)",
+                    fontFamily: "var(--header-font)",
+                }}
+            >Edit Review</h3>
             <textarea
+                style={{ width: "clamp(20rem, 1rem, 30vw)", fontSize: "0.9rem" }}
                 rows={5}
                 value={reviewText}
                 onChange={e => setReviewText(e.target.value)}></textarea>
             <input type="number" min="1" max="5" value={rating} onChange={e => setRating(e.target.value)} />
-            <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+            <div style={{ display: "flex", justifyContent: "space-evenly", paddingBottom: "1rem" }}>
                 <button className="primary" onClick={onSaveHandler}>Save</button>
-                <button className='critical' onClick={closeModal}>Cancel</button>
+                <button className='critical' onClick={closeModal}>Keep unchanged</button>
             </div>
             {error != "" && <p style={{ color: "red" }}>{error}</p>}
         </div>
@@ -66,23 +75,26 @@ function DeleteConfirmation({ review }) {
 
     return (
         <div style={{
-            width: "80%",
-            height: "40%",
+            borderBlock: "border-box",
             display: "flex",
             flexDirection: "column",
             gap: "1rem",
-            margin: "0 auto",
-            textAlign: "center",
         }}>
-            <h3>Delete Review?</h3>
-            <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+            <h3 style={{
+                margin: "0",
+                padding: "10% 10px 0 0",
+                backgroundColor: "var(--primary-v1)",
+                height: "5rem",
+                color: "var(--sub-secondary-v1)",
+                fontFamily: "var(--header-font)",
+            }}
+            >Delete Review?</h3>
+            <div style={{ display: "flex", gap: "0.5rem", margin: "1rem" }}>
                 <button style={{
-                    width: "100px",
-                    height: "30px",
+                    flexGrow: "1"
                 }} className='secondary' onClick={closeModal}>No</button>
                 <button style={{
-                    width: "100px",
-                    height: "30px",
+                    flexGrow: "1"
                 }} className="critical" onClick={onDeleteHandler}>Yes</button>
             </div>
         </div>
