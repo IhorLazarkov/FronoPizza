@@ -143,10 +143,11 @@ export default function MyReviewPage() {
     }, [reviews])
 
     return (
-        <div>
+        <>
             {reviewsState.length > 0
                 ? <div className='reviews_container'
                     style={{
+                        width: "100%",
                         display: "flex",
                         flexDirection: "column",
                         gap: "10px"
@@ -179,6 +180,6 @@ export default function MyReviewPage() {
                 </div>
                 : <h2>You have no reviews yet</h2>}
 
-        </div>
+        </>
     )
 }
