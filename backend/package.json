@@ -10,8 +10,8 @@
     "start:development": "nodemon ./bin/www",
     "start:production": "node ./bin/www",
     "build": "node psql-setup-script.js",
-    "migrate":"npx dotenv sequelize-cli db:migrate",
-    "seed":"npx dotenv sequelize-cli db:seed:all"
+    "migrate": "npx dotenv sequelize-cli db:migrate",
+    "seed": "npx dotenv sequelize-cli db:seed:all"
   },
   "keywords": [],
   "author": "ilazarkov@gmail.com",
@@ -37,6 +37,7 @@
     "per-env": "^1.0.2",
     "pg": "^8.15.6",
     "sequelize": "^6.37.7",
-    "sequelize-cli": "^6.6.2"
+    "sequelize-cli": "^6.6.2",
+    "websocket": "^1.0.35"
   }
 }

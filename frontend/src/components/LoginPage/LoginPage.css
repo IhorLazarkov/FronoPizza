@@ -2,8 +2,10 @@
   width: 100vw;
   height: 100vh;
   background-color: inherit;
-  background-image: url("/assets/bg-img-login-page.jpg.avif");
+  background-image: url("/assets/login-background.jpg");
   background-size: cover;
+  background-position: left;
+  background-repeat: no-repeat;
   position: absolute;
   top: 0;
   left: 0;
@@ -14,26 +16,29 @@
 .signup-form {
   border: 0px solid #000;
   height: 100vh;
-  width: 30%;
+  width: clamp(30%, 1rem, 50%);
   align-content: center;
-  /* backdrop-filter: blur(0.15rem); */
   overflow: hidden;
 
   & form {
     border: 1px solid var(--sub-secondary-v1);
     backdrop-filter: blur(0.15rem);
     border-radius: 0rem;
-    margin: 0 auto;
     padding: 2rem;
     width: 80%;
-    height: 70%;
+    height: 90%;
     display: flex;
     flex-direction: column;
     gap: 10px;
 
     & input,
     button {
-      height: 2rem;
+      height: 3rem;
+      font-size: large;
+    }
+    & input {
+      padding-left: 1rem;
+      font-size: 1.2rem;
     }
   }
 }
@@ -41,5 +46,18 @@
 .signup-form {
   & form {
     height: 90%;
+  }
+}
+
+.login-form,
+.signup-form {
+
+  & input:is(:user-valid) {
+    border: 3px solid green;
+  }
+
+  & input:is(:user-invalid) {
+    border: 3px solid red;
+    background-color: lightcoral;
   }
 }

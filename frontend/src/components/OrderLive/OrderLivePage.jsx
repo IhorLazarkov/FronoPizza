@@ -16,7 +16,7 @@ export default function OrderLivePage() {
 
   //on mount
   useEffect(() => {
-    const ws = new WebSocket(`ws://localhost:3005/`);
+    const ws = new WebSocket(`wss://99.98.183.163:3005`);
 
     ws.onmessage = messgae => {
 
@@ -40,7 +40,6 @@ export default function OrderLivePage() {
 
     ws.onerror = (err) => {
       console.error({ err });
-      // setError(`Connection error: ${JSON.stringify(err)}`);
     }
 
     ws.onclose = () => {
@@ -52,7 +51,7 @@ export default function OrderLivePage() {
     return () => {
       ws.close();
     };
-  }, [])
+  }, [id])
 
   return (
     <div className="order-live-container">

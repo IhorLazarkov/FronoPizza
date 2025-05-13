@@ -21,7 +21,7 @@ export default function MyFavoritesPage() {
     }, [dispatch])
 
     return (
-        <>
+        <div>
             {favoritesState.length > 0
                 ? favoritesState.map(pizza => (
                     <div className="fav_card_container"
@@ -43,6 +43,6 @@ export default function MyFavoritesPage() {
                 ))
                 : <h2>No favorites yet</h2>
             }
-        </>
+        </div>
     )
 }
