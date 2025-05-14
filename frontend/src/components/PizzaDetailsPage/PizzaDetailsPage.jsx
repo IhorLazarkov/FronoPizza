@@ -4,11 +4,13 @@ import { AiOutlineLike } from "react-icons/ai";
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getPizzaDetails } from "../../store/pizzaDetails";
-
-import ModalButton from "../ModalButton";
 import { useModal } from "../../context/Modal";
+
+import { getPizzaDetails } from "../../store/pizzaDetails";
 import { addReview } from "../../store/reviews";
+import { addPizzaToCart } from "../../store/cart";
+import ModalButton from "../ModalButton";
+import ReviewStars from "../ReviewStars";
 
 function ReviewForm({ pizza_id }) {
     const { closeModal } = useModal()
@@ -16,6 +18,7 @@ function ReviewForm({ pizza_id }) {
     const user = useSelector(state => state.user)
     const [reviewMessage, setReviewMessage] = useState("");
     const [rating, setRating] = useState(1);
+    const [error, setError] = useState("");
 
     const onAddReview = () => {
         const review = {
@@ -26,27 +29,41 @@ function ReviewForm({ pizza_id }) {
         }
         dispatch(addReview(review))
             .then(() => closeModal())
-            .catch(err => console.log(err))
+            .catch(err => setError(err.message.errors[0]));
     }
 
     return (
         <div style={{
+            borderBlock: "border-box",
             display: "flex",
             flexDirection: "column",
-            gap: "10px",
-            alignItems: "center",
+            gap: "1rem",
         }}>
-            <h3>Add Review</h3>
-            <textarea rows={5} value={reviewMessage} onChange={e => setReviewMessage(e.target.value)}></textarea>
-            <input
-                value={rating}
-                type="number" min="1" max="5"
-                onChange={e => setRating(e.target.value)}
-            />
-            <div style={{ display: "flex", gap: "10px" }}>
-                <button className="critical" onClick={closeModal}>Cancel</button>
+            <h3
+                style={{
+                    margin: "0",
+                    paddingTop: "10%",
+                    backgroundColor: "var(--primary-v1)",
+                    height: "5rem",
+                    color: "var(--sub-secondary-v1)",
+                    fontFamily: "var(--header-font)",
+                }}>Add Review</h3>
+            <textarea
+                style={{
+                    width: "clamp(20rem, 1rem, 30vw)",
+                    fontSize: "0.9rem",
+                    position: "relative"
+                }}
+                rows={5}
+                value={reviewMessage}
+                onChange={e => setReviewMessage(e.target.value)}
+            ></textarea>
+            <ReviewStars rating={rating} setRating={setRating} />
+            <div style={{ display: "flex", justifyContent: "space-evenly", paddingBottom: "1rem" }}>
                 <button className="primary" onClick={onAddReview}>Create</button>
+                <button className="critical" onClick={closeModal}>Cancel</button>
             </div>
+            {error != "" && <p style={{ color: "red" }}>{error}</p>}
         </div>
     )
 }
@@ -71,6 +88,10 @@ export default function PizzaDetailsPage() {
         return `${arrMonth[month]} ${day} ${year}`;
     }
 
+    const addToCart = (pizza) => {
+        dispatch(addPizzaToCart(pizza))
+    }
+
     useEffect(() => {
         dispatch(getPizzaDetails(id))
             .then(pizzaDetails => {
@@ -89,7 +110,16 @@ export default function PizzaDetailsPage() {
                 <div className="info" >
                     <h1>{pizzaState.name}</h1>
                     <p>{pizzaState.description}</p>
-                    <div style={{ fontSize: "1.5rem" }}>Cost: ${pizzaState.price}</div>
+                    <div>Cost: ${pizzaState.price}</div>
+                    <button
+                        className="primary"
+                        style={{
+                            fontSize: "1rem",
+                            width: "fit-content",
+                            transform: "rotate(0deg)"
+                        }}
+                        onClick={() => addToCart(pizzaState)}
+                    >Add to cart</button>
                 </div>
             </div>
             <section className="ingredients">
