@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteReview, getReviews, updateReview } from '../../store/reviews';
 import { useModal } from '../../context/Modal';
+import ReviewStars from '../ReviewStars';
 
 function EditConfirmation({ review }) {
     const dispatch = useDispatch();
@@ -53,7 +54,7 @@ function EditConfirmation({ review }) {
                 rows={5}
                 value={reviewText}
                 onChange={e => setReviewText(e.target.value)}></textarea>
-            <input type="number" min="1" max="5" value={rating} onChange={e => setRating(e.target.value)} />
+            <ReviewStars rating={rating} setRating={setRating} />
             <div style={{ display: "flex", justifyContent: "space-evenly", paddingBottom: "1rem" }}>
                 <button className="primary" onClick={onSaveHandler}>Save</button>
                 <button className='critical' onClick={closeModal}>Keep unchanged</button>

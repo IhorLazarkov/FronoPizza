@@ -56,7 +56,7 @@
     & .ingredient {
       & h3 {
         margin: 0;
-    padding: 1rem;
+        padding: 1rem;
         background-color: var(--primary-v1);
         font-family: var(--header-font);
         color: var(--sub-secondary-v1);
