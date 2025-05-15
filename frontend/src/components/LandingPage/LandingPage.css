@@ -34,6 +34,7 @@
     transform: rotate(-45deg);
     top: 0.8rem;
     left: -1.2rem;
+    z-index: 1;
   }
 }
 
@@ -55,6 +56,7 @@
 
   & .img_container {
     overflow: hidden;
+    position: relative;
   }
 
   & img {
@@ -132,5 +134,23 @@
   & img {
     width: 100%;
     object-fit: cover;
+  }
+}
+
+.spinner.on{
+    animation: rotating 1s linear infinite;
+}
+
+.spinner.off{
+    display: none;
+}
+
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }

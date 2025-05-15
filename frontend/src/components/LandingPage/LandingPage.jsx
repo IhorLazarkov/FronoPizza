@@ -11,6 +11,7 @@ import { addIngredientToCart, addPizzaToCart } from '../../store/cart';
 import { getIngredients } from '../../store/ingredients';
 import { getFavorites, addFavorite, removeFavorite } from '../../store/favorites';
 import { NavLink } from 'react-router-dom';
+import { Img } from '../LoginPage/Img';
 
 function LandingPage() {
 
@@ -82,13 +83,7 @@ function LandingPage() {
             className="pizza_card"
             key={pizza.id}>
             <h2>{pizza.name}</h2>
-            <div className="img_container">
-              <img
-                src={pizza.image}
-                loading='lazy'
-                alt={pizza.name} />
-            </div>
-
+            <Img url={pizza.image} name={pizza.name} />
             <p>{pizza.description}</p>
             {/* Ingredients */}
             <ul>
@@ -139,9 +134,7 @@ function LandingPage() {
         <span className='banner'>Add-ons</span>
         {ingredientsState && Object.values(ingredientsState).map(ingredient => (
           <div className='ingredient_card' key={ingredient.id}>
-            <div className="img_container">
-              <img src={ingredient.image} alt={ingredient.name} />
-            </div>
+            <Img url={ingredient.image} name={ingredient.name} />
             <p>{ingredient.name}</p>
             <div className='pizza_card_footer'>
               <div>Cost: ${ingredient.price}</div>
