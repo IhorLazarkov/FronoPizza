@@ -84,7 +84,6 @@ function LandingPage() {
             key={pizza.id}>
             <h2>{pizza.name}</h2>
             <Img url={pizza.image} name={pizza.name} />
-
             <p>{pizza.description}</p>
             {/* Ingredients */}
             <ul>
