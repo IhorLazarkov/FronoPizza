@@ -14,7 +14,6 @@ export default function LoginPage() {
 
   // UI state
   const [loggedInUser, setLoggedInUser] = useState(user)
-  const [error, setError] = useState("")
 
   const onLogout = () => {
     dispatch(logout()).then(() => {
@@ -24,7 +23,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     dispatch(restoreUser()).then((res) => {
-      if (!res.ok) setError(res.title)
+      if (!res.ok) console.error({ res });
     })
   }, [dispatch])
 
@@ -39,7 +38,6 @@ export default function LoginPage() {
         : <div id="login-page">
           {showLoginForm && <LoginForm setShowLoginForm={setShowLoginForm} setShowSignupForm={setShowSignupForm} />}
           {showSignupForm && <SignupForm setShowLoginForm={setShowLoginForm} setShowSignupForm={setShowSignupForm} />}
-          <div style={{ borderColor: "red", color: "red" }}>{error}</div>
         </div>
       }
     </>
@@ -71,25 +69,62 @@ function LoginForm({ setShowLoginForm, setShowSignupForm }) {
   }
 
   return (
-    <div className="login-form">
-      <form onSubmit={onSumbitLogin}>
-        <img src="../../assets/logo.png" alt="logo" />
-        <input autoFocus placeholder="email" type="email" value={email} required onChange={e => setEmail(e.target.value)} />
-        <input placeholder="password" type="password" value={password} required onChange={e => setPassword(e.target.value)} />
-        <button className="primary" type="submit">Login</button>
-        <button className="secondary" onClick={() => {
-          setShowLoginForm(false)
-          setShowSignupForm(true)
-        }}>Signup</button>
-        <button className="critical" onClick={onDemoSumbitLogin}>Login as Demo User</button>
-        {error && <div style={{
-          backgroundColor: "var(--sub-secondary-v1)",
-          borderColor: "red",
-          color: "red",
-          padding: "5px",
-        }}>{error}</div>}
-      </form>
-    </div>
+    <>
+      <div className="login-form">
+        <form onSubmit={onSumbitLogin}>
+          <img src="../../assets/logo.png" alt="logo" />
+          <input autoFocus placeholder="email" type="email" value={email} required onChange={e => setEmail(e.target.value)} />
+          <input placeholder="password" type="password" value={password} required onChange={e => setPassword(e.target.value)} />
+          <button className="primary" type="submit">Login</button>
+          <button className="secondary" onClick={() => {
+            setShowLoginForm(false)
+            setShowSignupForm(true)
+          }}>Signup</button>
+          <button className="critical" onClick={onDemoSumbitLogin}>Login as Demo User</button>
+          {error && <div style={{
+            backgroundColor: "var(--sub-secondary-v1)",
+            borderColor: "red",
+            color: "red",
+            padding: "5px",
+          }}>{error}</div>}
+        </form>
+      </div>
+
+
+      <div style={{
+        position: "fixed",
+        bottom: "0",
+        right: "0",
+        color: "var(--sub-secondary-v1)",
+        backdropFilter: "blur(3px)",
+      }}>
+        <ul style={{
+          listStyle: "none",
+          padding: "1rem",
+          margin: "0",
+        }}>
+          <li>This in not a financial product but portfolio project</li>
+          <li>&copy; Ihor Lazarkov property</li>
+          <li>email: ilazarkov@gmail.com</li>
+          <li>Credits:</li>
+          <li>Chat GPT for collor collection, logo, fonts</li>
+          <li>Icons from:</li>
+          <li>https://react-icons.github.io/react-icons/</li>
+          <li>Photos from:</li>
+          <li>https://www.pantrymama.com/</li>
+          <li>https://www.tastingtable.com/</li>
+          <li>https://www.withspice.com/</li>
+          <li>https://www.seriouseats.com/</li>
+          <li>https://www.rockrecipes.com/</li>
+          <li>https://www.allrecipes.com/</li>
+          <li>https://culinarylore.com/</li>
+          <li>https://www.health.com/</li>
+          <li>https://www.allrecipes.com/</li>
+          <li>https://upload.wikimedia.org/</li>
+          <li>All similarities are accidental.</li>
+        </ul>
+      </div>
+    </>
   )
 }
 
