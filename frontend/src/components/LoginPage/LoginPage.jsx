@@ -23,7 +23,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     dispatch(restoreUser()).then((res) => {
-      console.error({ res });
+      if (!res.ok) console.error({ res });
     })
   }, [dispatch])
 

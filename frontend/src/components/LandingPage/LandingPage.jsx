@@ -83,7 +83,10 @@ function LandingPage() {
             key={pizza.id}>
             <h2>{pizza.name}</h2>
             <div className="img_container">
-              <img src={pizza.image} alt={pizza.name} />
+              <img
+                src={pizza.image}
+                loading='lazy'
+                alt={pizza.name} />
             </div>
 
             <p>{pizza.description}</p>
