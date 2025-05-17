@@ -1,8 +1,48 @@
 # Frono Roma
 
-Oven Rome is a pizzeria online.
+Oven Rome is a pizzeria online with voice capable agent to order pizza.
 
 Author: [Ihor Lazarkov](https://ihorlazarkov.github.io/IhorLazarkov/)
+
+### To start a project
+
+1. Install all dependencies for backend and frontend
+
+> cd backend && npm i
+> cd frontend && npm i
+
+2. Create a .env file in backend folder and add the following variables:
+
+> cd backend && touch .env
+
+```.env
+NODE_ENV=development
+PORT=3000
+DB_FILE=db/dev.db
+JWT_SECRET=<secret>
+JWT_EXPIRES_IN=604800
+
+# DATABASE_URL=TODO:
+SCHEMA=<shcema-name>
+
+WEBSOCKET_PORT=3001
+```
+
+to generate a secret key use:
+> node
+> > require('crypto').randomBytes(64).toString('hex')
+> > >.exit
+
+3. Create dev.db
+> cd backend 
+> npm run migrate
+> npm run seed
+
+4. build HTML and CSS 
+> cd frontend && npm run build
+
+5. Start the app
+> cd backend && npm start
 
 ## Tech stack
 
