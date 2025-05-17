@@ -21,6 +21,15 @@ Author: [Ihor Lazarkov](https://ihorlazarkov.github.io/IhorLazarkov/)
 ![db schema](./docs/forno-roma-architecture.png)
 </details>
 
+## Demo
+
+<details open>
+    <summary>Demo</summary>
+
+![Video](./docs/demo.mov)
+
+</details>
+
 ## Colors
 
 <details>
