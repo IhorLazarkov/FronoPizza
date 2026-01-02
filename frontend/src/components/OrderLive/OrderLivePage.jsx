@@ -16,7 +16,8 @@ export default function OrderLivePage() {
 
   //on mount
   useEffect(() => {
-    const ws = new WebSocket(`wss://99.98.183.163:3005`);
+    // const ws = new WebSocket(`wss://99.98.183.163:3005`);
+    const ws = new WebSocket(`wss://pizza-order-status.ihorlazarkov-swe.in`);
 
     ws.onmessage = messgae => {
 
