@@ -9,7 +9,7 @@ Author: [Ihor Lazarkov](https://ihorlazarkov.github.io/IhorLazarkov/)
 <details open>
     <summary> Tech Stack</summary>
     
-<img src="https://skillicons.dev/icons?i=react,redux,sequelize,npm,nodejs,nginx,postgres,sqlite" heigth="40"></img>
+<img src="https://skillicons.dev/icons?i=react,redux,sequelize,nodejs,nginx,postgres,sqlite" heigth="40"></img>
 
 </details>
 
