@@ -70,6 +70,19 @@ to generate a secret key use:
 ![db schema](./docs/forno-roma-architecture.png)
 </details>
 
+## Demo
+
+<details open>
+    <summary>Demo</summary>
+
+![Video](./docs/demo.mov)
+
+the size of demo file is about 18MB and it looks it's to big for github to play it back.
+
+[linkedIn video](https://www.linkedin.com/posts/ihorlazarkov_fullstackdevelopment-reactjs-websockets-activity-7328939467954675712-fdEh?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAPf68EB_q2p0vnZO4fTFc5p9xBFbCKHJiE)
+
+</details>
+
 ## Colors
 
 <details>
