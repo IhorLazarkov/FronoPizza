@@ -66,7 +66,7 @@ to generate a secret key use:
 <details open>
     <summary>Demo</summary>
 
-![Video](./docs/demo.mov)
+[![Demo Video](docs/demo.mov?raw=true)](docs/demo.mov)
 
 the size of demo file is about 18MB and it looks it's to big for github to play it back.
 
